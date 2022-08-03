@@ -11,7 +11,6 @@ use Carbon\Carbon;
 
 class VehiculoController extends Controller
 {
-
     public function showAll()
     {
         return response()->json(BitRegVehiculos::all());
@@ -24,16 +23,11 @@ class VehiculoController extends Controller
 
     public function createRegVeh(Request $request)
     {
-
         $params = $request->all();
         $arr = $params['parametros'];
-        $par ="";
         foreach ($arr as $value) {
-
-            $par = $value;
-            $field_name = ["stock"];
             $Camposinsert = ["stock" => $value]; //$this->getInserts($field_name, $value);
-            $data = DB::table("bit_reg_vehiculos")->upsert($Camposinsert, ['id_reg_veh']);
+            DB::table("bit_reg_vehiculos")->upsert($Camposinsert, ['id_reg_veh']);
             $idRegVeh = BitRegVehiculos::latest('id_reg_veh')->first();
 
             //$date = Carbon::parse('2022-08-02 10:11:00');
@@ -43,18 +37,11 @@ class VehiculoController extends Controller
         }
 
         return response()->json(["message" => "Creacion correcta", "status" => 201, "idRegVeh" => $idRegVeh->id_reg_veh,], 201);
-
-        //        $this->validate($request->parametros, [
-        //            'stock' => 'required'
-        //        ]);
-        //
-        //        $data = BitRegVehiculos::create($request->all());
-        //return response()->json($data, 201);
+        //$data = BitRegVehiculos::create($request->all());
     }
 
     public function updateRegVeh(Request $request)
     {
-
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -76,7 +63,6 @@ class VehiculoController extends Controller
 
     public function addPzaCambio(Request $request)
     {
-
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -84,23 +70,19 @@ class VehiculoController extends Controller
         $nomPzaCambio = $arr['nomPzaCambio'];
 
         $Camposinsert = ['id_reg_veh' => $idRegVeh, 'tipo' => 'cambio', 'pieza' => $nomPzaCambio, 'estatus' => 'alta', 'id_user_registra' => '1'];
-        $data = DB::table("bit_piezas")->upsert($Camposinsert, ['id_bit_piezas']);
+        DB::table("bit_piezas")->upsert($Camposinsert, ['id_bit_piezas']);
 
-        $sql = "SELECT  `bit_piezas`.`id_bit_piezas`,
-  `bit_piezas`.`pieza`
-FROM
-  `bit_piezas`
-WHERE
-  `bit_piezas`.`id_reg_veh` = '$idRegVeh' AND 
-  `bit_piezas`.`tipo` = 'cambio'";
-        $registros = DB::select($sql);
+        $registros =
+            DB::table('bit_piezas')
+            ->where('id_reg_veh', $idRegVeh)
+            ->where('tipo', "cambio")
+            ->get(["id_bit_piezas", "pieza"]);
 
         return response()->json(["message" => "Update correcta", "status" => 201, "registros" => $registros], 201);
     }
 
     public function addPzaRepar(Request $request)
     {
-
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -108,27 +90,33 @@ WHERE
         $nomPzaRepar = $arr['nomPzaRepar'];
 
         $Camposinsert = ['id_reg_veh' => $idRegVeh, 'tipo' => 'reparacion', 'pieza' => $nomPzaRepar, 'estatus' => 'alta', 'id_user_registra' => '1'];
-        $data = DB::table("bit_piezas")->upsert($Camposinsert, ['id_bit_piezas']);
+        DB::table("bit_piezas")->upsert($Camposinsert, ['id_bit_piezas']);
 
-        $sql = "SELECT  `bit_piezas`.`id_bit_piezas`,
-  `bit_piezas`.`pieza`
-FROM
-  `bit_piezas`
-WHERE
-  `bit_piezas`.`id_reg_veh` = '$idRegVeh' AND 
-  `bit_piezas`.`tipo` = 'reparacion'";
-        $registros = DB::select($sql);
+        $registros =
+            DB::table('bit_piezas')
+            ->where('id_reg_veh', $idRegVeh)
+            ->where('tipo', "reparacion")
+            ->get(["id_bit_piezas", "pieza"]);
 
         return response()->json(["message" => "Update correcta", "status" => 201, "registros" => $registros], 201);
     }
 
+    public function addFiles(Request $request)
+    {
+        if ($request->file('file_vehiculo')->isValid()) {
+            $extension = $request->file('file_vehiculo')->getClientOriginalExtension();
+            $now = Carbon::now()->format('Ymd_His');
+            $fileName = uniqid() . "_" . $now . "." . $extension;
+            $destinationPath = getcwd() . "\\images\\vehiculos\\";
+            $request->file('file_vehiculo')->move($destinationPath, $fileName);
+        }
+
+        return response()->json(["message" => "Upload correcto", "status" => 201, "path" => $destinationPath, "filename" => $fileName], 201);
+    }
 
     public function insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, $idAsignado, $ResultInspeccion, $EntregadoA, $Comentario)
     {
-
-        $Camposinsert0="";
-        $fec_actual = $date = Carbon::now('America/Mexico_City'); //date("Y-m-d H:i:s");
-
+        $fec_actual = Carbon::now('America/Mexico_City'); //date("Y-m-d H:i:s");
         if ($estatus == "Asignado") {
             $Camposinsert = [
                 "id_reg_veh" => $idRegVeh, "estatus" => $estatus, "fec_registro" => $fec_actual, "fec_estatus" => $fecEstatus,
@@ -150,8 +138,7 @@ WHERE
                 "id_usuario_registra" => $idUserReg, "comentario_estatus" => $Comentario
             ];
         }
-
-        $data = DB::table("bit_log_estatus")->upsert($Camposinsert, ['id_log_estatus']);
+        DB::table("bit_log_estatus")->upsert($Camposinsert, ['id_log_estatus']);
         //return $data;
     }
 }
