@@ -30,4 +30,5 @@ class PlantillaDataDemo extends Model
      * @var array
      */
     protected $hidden = [];
+
 }
