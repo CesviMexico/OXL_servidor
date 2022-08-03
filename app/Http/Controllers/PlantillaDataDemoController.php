@@ -57,8 +57,4 @@ class PlantillaDataDemoController extends Controller
         PlantillaDataDemo::findOrFail($id)->delete();
         return response('Deleted Successfully', 200);
     }
-    
-    
-    
-    
 }

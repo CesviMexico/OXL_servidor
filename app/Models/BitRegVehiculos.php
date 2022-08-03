@@ -20,7 +20,7 @@ class BitRegVehiculos extends Model
      * @var string
      */
     protected $primaryKey = 'id_reg_veh';
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -28,9 +28,9 @@ class BitRegVehiculos extends Model
      * @var array
      */
     protected $fillable = [
-        'stock', 'vin', 'marca','modelo','anio','color','tipo_danio', 
-        'estatus', 'id_user_registra','id_taller_asignado','fec_asignado',
-        'fec_ingreso','fec_inspeccion', 'result_inspeccion', 'fec_entrega', 'entregado_a'
+        'stock', 'vin', 'marca', 'modelo', 'anio', 'color', 'tipo_danio',
+        'estatus', 'id_user_registra', 'id_taller_asignado', 'fec_asignado',
+        'fec_ingreso', 'fec_inspeccion', 'result_inspeccion', 'fec_entrega', 'entregado_a'
     ];
 
     /**
