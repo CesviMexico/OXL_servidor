@@ -176,15 +176,35 @@ class VehiculoController extends Controller {
 
     public function addFiles(Request $request) {
         if ($request->file('file_vehiculo')->isValid()) {
+            $params = $request->all();
+            $idRegVeh = $params['idRegVeh'];
+            $estatus = $params['estatus'];
             $extension = $request->file('file_vehiculo')->getClientOriginalExtension();
             $now = Carbon::now()->format('Ymd_His');
-            $fileName = uniqid() . "_" . $now . "." . $extension;
-            $destinationPath = getcwd() . "\\images\\vehiculos\\";
+            $fileName = $estatus."_".uniqid() ."_". $now . "." . $extension;
+            $destinationPath = getcwd() . "\\images\\vehiculos\\".$idRegVeh."\\";
             $request->file('file_vehiculo')->move($destinationPath, $fileName);
+            
+            $Camposinsert = ["id_reg_veh" => $idRegVeh, "tipo"=>"fotografia", "estatus_registro"=>$estatus, "id_user_registra"=>"1", "evidencia"=>$fileName]; //$this->getInserts($field_name, $value);
+            DB::table("bit_evidencia")->upsert($Camposinsert, ['id_bit_evidencia']);
         }
 
         return response()->json(["message" => "Upload correcto", "status" => 201, "path" => $destinationPath, "filename" => $fileName], 201);
     }
+    
+    public function deletefiles(Request $request) {
+       
+        $params = $request->all();
+        $arr = $params['parametros'];
+
+        $fileName = $arr['file'];
+        $idRegVeh = $arr['idRegVeh'];
+        
+       $res =  DB::table('bit_evidencia')->where('evidencia', $fileName)->where('id_reg_veh', $idRegVeh)->delete();
+        
+        return response()->json(["message" => "Upload correcto", "status" => 201, "res" => $res], 201);
+    }
+    
 
     public function insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, $idAsignado, $ResultInspeccion, $EntregadoA, $Comentario) {
         $fec_actual = Carbon::now('America/Mexico_City'); //date("Y-m-d H:i:s");

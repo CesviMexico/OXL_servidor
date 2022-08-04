@@ -13,6 +13,7 @@ $router->group(['prefix' => 'vehiculos'], function () use ($router) {
     $router->post('pzaCambio', ['uses' => 'VehiculoController@addPzaCambio']);
     $router->post('pzaRepar', ['uses' => 'VehiculoController@addPzaRepar']);
     $router->post('files', ['uses' => 'VehiculoController@addFiles']);
+    $router->post('deletefiles', ['uses' => 'VehiculoController@deletefiles']);
     $router->post('WSVInPlusCat', ['uses' => 'VehiculoController@WSVInPlusCat']);
     $router->post('deletPza', ['uses' => 'VehiculoController@deletPza']);
 });
