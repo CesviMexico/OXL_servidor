@@ -18,6 +18,7 @@ $router->group(['prefix' => 'vehiculos'], function () use ($router) {
     $router->post('WSVInPlusCat', ['uses' => 'VehiculoController@WSVInPlusCat']);
     $router->post('deletPza', ['uses' => 'VehiculoController@deletPza']);
     $router->post('AsignacionTaller',  ['uses' => 'VehiculoController@AsignacionTaller']);
+    $router->post('IngresoVehTaller',  ['uses' => 'VehiculoController@IngresoVehTaller']);
 });
 
 $router->group(['prefix' => 'Talleres'], function () use ($router) {

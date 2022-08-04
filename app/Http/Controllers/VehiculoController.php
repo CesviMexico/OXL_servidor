@@ -241,17 +241,17 @@ class VehiculoController extends Controller
     public function insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, $idAsignado, $ResultInspeccion, $EntregadoA, $Comentario)
     {
         $fec_actual = Carbon::now('America/Mexico_City'); //date("Y-m-d H:i:s");
-        if ($estatus == "Asignado") {
+        if ($estatus == "asignado") {
             $Camposinsert = [
                 "id_reg_veh" => $idRegVeh, "estatus" => $estatus, "fec_registro" => $fec_actual, "fec_estatus" => $fecEstatus,
                 "id_usuario_registra" => $idUserReg, "comentario_estatus" => $Comentario, "id_asignado" => $idAsignado
             ];
-        } else if ($estatus == "Inspeccionado") {
+        } else if ($estatus == "inspeccionado") {
             $Camposinsert = [
                 "id_reg_veh" => $idRegVeh, "estatus" => $estatus, "fec_registro" => $fec_actual, "fec_estatus" => $fecEstatus,
                 "id_usuario_registra" => $idUserReg, "comentario_estatus" => $Comentario, "result_inspeccion" => $ResultInspeccion
             ];
-        } else if ($estatus == "Entregado") {
+        } else if ($estatus == "entregado") {
             $Camposinsert = [
                 "id_reg_veh" => $idRegVeh, "estatus" => $estatus, "fec_registro" => $fec_actual, "fec_estatus" => $fecEstatus,
                 "id_usuario_registra" => $idUserReg, "comentario_estatus" => $Comentario, "entregado_a" => $EntregadoA
@@ -305,7 +305,7 @@ class VehiculoController extends Controller
         $idRegVeh = $arr['idRegVeh'];
         $idTallerAsignado = $arr['idTaller'];
         
-        $estatus = "Asignado";
+        $estatus = "asignado";
         $fecEstatus =  Carbon::now('America/Mexico_City');
         $idUserReg = "1";
         
@@ -320,4 +320,28 @@ class VehiculoController extends Controller
          return response()->json(["message" => "Upload correcto", "status" => 201, "res" => $res], 201);
         
     }
+    
+     public function IngresoVehTaller(Request $request){
+        $params = $request->all();
+        $arr = $params['parametros'];
+
+        $idRegVeh = $arr['idRegVeh'];
+        $dateTimeSelect = $arr['dateTimeSelect'];
+        
+        $estatus = "ingresado";
+        $fecEstatus =  $dateTimeSelect;//Carbon::now('America/Mexico_City');
+        $idUserReg = "1";
+        
+         $CamposUpdatet = ["estatus" => $estatus, "fec_ingreso"=> $fecEstatus ]; 
+         $res = DB::table('bit_reg_vehiculos')
+            ->where('id_reg_veh', $idRegVeh)
+            ->update($CamposUpdatet);
+         
+        
+        $this->insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, "", "", "", "");
+             
+         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => $res], 201);
+        
+    }
+    
 }
