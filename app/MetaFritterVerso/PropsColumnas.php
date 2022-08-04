@@ -318,4 +318,9 @@ class PropsColumnas
     {
         return ["upload" => true, "actionUrl" => $actionUrl, "width" => $width . "px", "titleMSGC" => $titleMSGC, "titleMSGD" => $titleMSGD, "iconC" => $iconC, "iconD" => $iconD, "tipoFile" => $tipoFile, "multipleFile" => $multipleFile, "listType" => $listType];
     }
+
+    public static function getModales($titleTooltip, $icon)
+    {
+        return ["Modal" => true, "titleTooltip" => $titleTooltip, "icon" => $icon];
+    }
 }
