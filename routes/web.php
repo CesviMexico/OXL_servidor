@@ -7,7 +7,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'vehiculos'], function () use ($router) {
-    $router->get('',  ['uses' => 'VehiculoController@showAll']);
+    $router->get('',  ['uses' => 'VehiculoController@showStatus']);
     $router->post('',  ['uses' => 'VehiculoController@createRegVeh']);
     $router->put('',  ['uses' => 'VehiculoController@updateRegVeh']);
     $router->post('pzaCambio', ['uses' => 'VehiculoController@addPzaCambio']);
