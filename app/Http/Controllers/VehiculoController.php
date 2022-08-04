@@ -297,4 +297,27 @@ class VehiculoController extends Controller
             return $response;
         }
     }
+    
+    public function AsignacionTaller(Request $request){
+        $params = $request->all();
+        $arr = $params['parametros'];
+
+        $idRegVeh = $arr['idRegVeh'];
+        $idTallerAsignado = $arr['idTaller'];
+        
+        $estatus = "Asignado";
+        $fecEstatus =  Carbon::now('America/Mexico_City');
+        $idUserReg = "1";
+        
+         $CamposUpdatet = ["estatus" => $estatus, "fec_asignado"=> $fecEstatus, "id_taller_asignado"=>$idTallerAsignado ]; 
+         $res = DB::table('bit_reg_vehiculos')
+            ->where('id_reg_veh', $idRegVeh)
+            ->update($CamposUpdatet);
+         
+        
+        $this->insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, $idTallerAsignado, "", "", "");
+             
+         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => $res], 201);
+        
+    }
 }

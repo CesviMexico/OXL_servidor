@@ -8,6 +8,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'vehiculos'], function () use ($router) {
     $router->get('',  ['uses' => 'VehiculoController@showStatus']);
+    $router->get('/{id}',  ['uses' => 'VehiculoController@showOne']);
     $router->post('',  ['uses' => 'VehiculoController@createRegVeh']);
     $router->put('',  ['uses' => 'VehiculoController@updateRegVeh']);
     $router->post('pzaCambio', ['uses' => 'VehiculoController@addPzaCambio']);
@@ -16,4 +17,9 @@ $router->group(['prefix' => 'vehiculos'], function () use ($router) {
     $router->post('deletefiles', ['uses' => 'VehiculoController@deletefiles']);
     $router->post('WSVInPlusCat', ['uses' => 'VehiculoController@WSVInPlusCat']);
     $router->post('deletPza', ['uses' => 'VehiculoController@deletPza']);
+    $router->post('AsignacionTaller',  ['uses' => 'VehiculoController@AsignacionTaller']);
+});
+
+$router->group(['prefix' => 'Talleres'], function () use ($router) {
+    $router->get('',  ['uses' => 'Talleres@showCatTalleres']);   
 });
