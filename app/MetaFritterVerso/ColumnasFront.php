@@ -107,7 +107,7 @@ class ColumnasFront
             [
                 "data" => PropsColumnas::getDataBase("", "Select"),
                 "extras" => [
-                    PropsColumnas::getSelect(["option 1","option 2","option 3","option 4","option 5"])
+                    PropsColumnas::getSelect(["option 1", "option 2", "option 3", "option 4", "option 5"])
 
                 ]
             ],
@@ -119,6 +119,65 @@ class ColumnasFront
                 ]
             ],
 
+        ];
+        return $arr;
+    }
+
+    public static function columnasTablaPorAsignar()
+    {
+        $arr = [
+            [
+                "data" => PropsColumnas::getDataBase("Stock", "stock"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("VIN", "vin"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Marca", "marca"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Modelo", "modelo"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Año", "anio"),
+                "extras" => []
+            ], 
+            [
+                "data" => PropsColumnas::getDataBase("Color", "color"),
+                "extras" => []
+            ], 
+            [
+                "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Fotos"),
+                "extras" => [
+                    PropsColumnas::getActions(
+                        5,
+                        "¿Editar pavone?",
+                        "ic:round-photo-camera-back"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha de registro", ""),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Cancelar"),
+                "extras" => [
+                    PropsColumnas::getActions(
+                        5,
+                        "¿Cancelar?",
+                        "mdi:table-cancel"
+                    ),
+                ]
+            ],
         ];
         return $arr;
     }

@@ -13,12 +13,36 @@ class VehiculoController extends Controller
 {
     public function showAll()
     {
-        return response()->json(BitRegVehiculos::all());
+        $data = BitRegVehiculos::all();
+        return response()->json($data, 200);
     }
 
     public function showOne($id)
     {
         return response()->json(BitRegVehiculos::find($id));
+    }
+
+    public function showStatus(Request $request)
+    {
+        $params = $request->only(['_s']);
+        $estatus = $params['_s'];
+        $data = BitRegVehiculos::where("estatus", $estatus)->get();
+        $tipo_columnas = [
+            "por_asignar" => ColumnasFront::columnasTablaPorAsignar(),
+        ];
+        $columnas = $tipo_columnas[$estatus];
+        $columns = TablaFront::getColumns($columnas);
+        $title_table = "Por asignar";
+        $response = [
+            "status" => 200,
+            "status_info" => $params['_s'],
+            "data" => $data,
+            "columns" => $columns,
+            "message" => "Info Actualizada",
+            "props_table" => TablaFront::getPropsTable($title_table),
+            "type" => "success"
+        ];
+        return response()->json($response, 200);
     }
 
     public function createRegVeh(Request $request)

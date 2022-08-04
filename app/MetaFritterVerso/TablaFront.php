@@ -10,18 +10,18 @@ class TablaFront
     {
     }
 
-    public static function getPropsTable()
+    public static function getPropsTable($title)
     {
         return [
-            "pagination" => true,
-            "pageSize" => 5,
+            "pagination" => false,
+            "pageSize" => 15,
             "simplepage" => false,
             "positionBottom" => "bottomRight", // bottomLeft |bottomCenter|bottomRight
             "positionTop" => 'none', // topLeft |topCenter |topRight|
-            "Title" => 'Title example table dance churro',
+            "Title" => $title,
             "size" => 'small', //default | middle | small
-            "bordered" => true,
-            "scrollX" => 1200,
+            "bordered" => false,
+            "scrollX" => "100%",
             "scrollY" => 300,
             "IconAvatar" => 'mdi:cog-refresh-outline',
             "tableLayout" => "auto",
@@ -51,7 +51,8 @@ class TablaFront
             $values = [
                 "title" => $data['label'], 
                 "dataIndex" => $data['value'], 
-                "key" => $data['value']
+                "key" => $data['value'],
+                "width"=> "10%"
             ];
         }else{
             $values = [

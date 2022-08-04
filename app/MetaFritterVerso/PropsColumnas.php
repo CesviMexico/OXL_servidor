@@ -287,7 +287,7 @@ class PropsColumnas
 
     public static function getActions($width = 130, $titleMSG = "", $icon = "")
     {
-        return ["actions" => true, "width" => $width . "px", "titleMSG" => $titleMSG, "icon" => $icon,];
+        return ["actions" => true, "width" => $width . "%", "titleMSG" => $titleMSG, "icon" => $icon,];
     }
 
     public static function getDataPicker($width = 185, $placeholder = "DD/MM/YYYY", $format = "DD/MM/YYYY", $showTime = "")
