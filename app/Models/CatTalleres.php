@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BitRegVehiculos extends Model
+class CatTalleres extends Model
 {
 
     /**
@@ -12,14 +12,14 @@ class BitRegVehiculos extends Model
      *
      * @var string
      */
-    protected $table = 'bit_reg_vehiculos';
+    protected $table = 'cat_talleres';
 
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected $primaryKey = 'id_reg_veh';
+    protected $primaryKey = 'id_taller';
 
 
     /**
@@ -28,9 +28,7 @@ class BitRegVehiculos extends Model
      * @var array
      */
     protected $fillable = [
-        'stock', 'vin', 'marca', 'modelo', 'anio', 'color', 'tipo_danio',
-        'estatus', 'id_user_registra', 'id_taller_asignado', 'fec_asignado',
-        'fec_ingreso', 'fec_inspeccion', 'result_inspeccion', 'fec_entrega', 'entregado_a'
+        'nombre_taller', 'direccion', 'link_maps', 'coordenadas', 'contacto', 'estatus'
     ];
 
     /**
