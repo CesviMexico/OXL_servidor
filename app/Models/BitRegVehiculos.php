@@ -30,7 +30,7 @@ class BitRegVehiculos extends Model
     protected $fillable = [
         'stock', 'vin', 'marca', 'modelo', 'anio', 'color', 'tipo_danio',
         'estatus', 'id_user_registra', 'id_taller_asignado', 'fec_asignado',
-        'fec_ingreso', 'fec_inspeccion', 'result_inspeccion', 'fec_entrega', 'entregado_a'
+        'fec_ingreso', 'fec_terminado', 'result_inspeccion', 'fec_entrega', 'entregado_a'
     ];
 
     /**
