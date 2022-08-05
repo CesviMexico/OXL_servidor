@@ -353,4 +353,24 @@ class VehiculoController extends Controller {
         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => "ok"], 201);
     }
 
+    public function Entregado(Request $request) {
+        $params = $request->all();
+        $arr = $params['parametros'];
+
+        $idRegVeh = $arr['idRegVeh'];
+        $dateTimeSelect = $arr['dateTimeSelect'];
+        $entregadoA = $arr['entregadoA'];
+        $fecEstatus = $dateTimeSelect; //Carbon::now('America/Mexico_City');
+        $estatus = "entregado";
+        $idUserReg = "1";
+
+        $CamposUpdatet = ["estatus" => $estatus, "fec_entrega" => $fecEstatus, "entregado_a" => $entregadoA];
+        $res = DB::table('bit_reg_vehiculos')
+                ->where('id_reg_veh', $idRegVeh)
+                ->update($CamposUpdatet);
+        $this->insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, "", "", $entregadoA, "");
+
+        return response()->json(["message" => "Upload correcto", "status" => 201, "res" => "ok"], 201);
+    }
+
 }
