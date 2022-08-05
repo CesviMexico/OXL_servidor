@@ -122,8 +122,7 @@ class ColumnasFront
         ];
         return $arr;
     }
-
-    public static function columnasTablaPorAsignar($perfil="cesvi")
+    public static function columnasTablaPorAsignar($perfil = "cesvi")
     {
         $perfiles = [
             "cesvi" =>
@@ -133,7 +132,8 @@ class ColumnasFront
                     "extras" => [
                         PropsColumnas::getModales(
                             "Asignar",
-                            "ic:round-photo-camera-back"
+                            "ic:round-photo-camera-back",
+                            "asignacion"
                         ),
                     ]
                 ]
@@ -174,19 +174,14 @@ class ColumnasFront
                 "extras" => [
                     PropsColumnas::getModales(
                         "ver más",
-                        "ic:round-photo-camera-back"
+                        "ic:round-photo-camera-back",
+                        "fotos"
                     ),
                 ]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de registro", ""),
                 "extras" => []
-            ],
-            [
-                "perfil" => [
-                    "value" => "si",
-                    "label" => "asignar"
-                ]
             ],
             [
                 "data" => PropsColumnas::getDataBase("", "Cancelar"),
@@ -198,22 +193,425 @@ class ColumnasFront
                     ),
                 ]
             ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "asignar"
+                ]
+            ],
         ];
 
         foreach ($arr as $key => $value) {
-            if(array_key_exists("perfil", $value)){
+            if (array_key_exists("perfil", $value)) {
                 $obj_perfil = $value['perfil'];
                 $label = $obj_perfil['label'];
-                if(array_key_exists($perfil, $perfiles)){
+                if (array_key_exists($perfil, $perfiles)) {
                     $column = $perfiles[$perfil][$label];
                     $arr[$key] = $column;
-                }
-                else{
+                } else {
                     unset($arr[$key]);
-                }       
+                }
             }
         }
 
         return array_values($arr);
     }
+    public static function columnasTablaAsignados($perfil = "cesvi")
+    {
+        $taller = [
+            "data" => PropsColumnas::getDataBase("Taller", "taller"),
+            "extras" => []
+        ];
+        $cancelar = [
+            "data" => PropsColumnas::getDataBase("", "Cancelar"),
+            "extras" => [
+                PropsColumnas::getActions(
+                    5,
+                    "¿Cancelar?",
+                    "mdi:table-cancel"
+                ),
+            ]
+        ];
+        $ingreso =
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Ingreso",
+                        "ic:round-photo-camera-back",
+                        "ingreso"
+                    ),
+                ]
+            ];
+
+        $perfiles = [
+            "cesvi" => [
+                "cancelar" => $cancelar,
+                "taller" => $taller,
+                "ingreso" => $ingreso
+            ],
+            "taller" => [
+                "ingreso" => $ingreso
+            ],
+            "olx" => [
+                "taller" => $taller
+            ]
+        ];
+
+        $arr = [
+            [
+                "data" => PropsColumnas::getDataBase("Stock", "stock"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("VIN", "vin"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Marca", "marca"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Modelo", "modelo"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Año", "anio"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Color", "color"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
+                "extras" => []
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "taller"
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha de registro", ""),
+                "extras" => []
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "cancelar"
+                ]
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "ingreso"
+                ]
+            ]
+        ];
+
+        foreach ($arr as $key => $value) {
+            if (array_key_exists("perfil", $value)) {
+                $obj_perfil = $value['perfil'];
+                $label = $obj_perfil['label'];
+                if (array_key_exists($perfil, $perfiles)) {
+                    $column = $perfiles[$perfil][$label];
+                    $arr[$key] = $column;
+                } else {
+                    unset($arr[$key]);
+                }
+            }
+        }
+
+        return array_values($arr);
+    }
+    public static function columnasTablaEnTaller($perfil = "cesvi")
+    {
+        $taller = [
+            "data" => PropsColumnas::getDataBase("Taller", "taller"),
+            "extras" => []
+        ];
+        $cancelar = [
+            "data" => PropsColumnas::getDataBase("", "Cancelar"),
+            "extras" => [
+                PropsColumnas::getActions(
+                    5,
+                    "¿Cancelar?",
+                    "mdi:table-cancel"
+                ),
+            ]
+        ];
+        $inspeccion =
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Inspección",
+                        "ic:round-photo-camera-back",
+                        "inspeccion"
+                    ),
+                ]
+            ];
+
+        $perfiles = [
+            "cesvi" => [
+                "cancelar" => $cancelar,
+                "taller" => $taller,
+                "inspeccion" => $inspeccion
+            ],
+            "taller" => [
+                "inspeccion" => $inspeccion
+            ],
+            "olx" => [
+                "taller" => $taller
+            ]
+        ];
+
+        $arr = [
+            [
+                "data" => PropsColumnas::getDataBase("Stock", "stock"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("VIN", "vin"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Marca", "marca"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Modelo", "modelo"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Año", "anio"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Color", "color"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
+                "extras" => []
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "taller"
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha de ingreso", ""),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos_ingreso"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
+                "extras" => []
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "inspeccion"
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Revisión",
+                        "ic:round-photo-camera-back",
+                        "revision"
+                    ),
+                ]
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "cancelar"
+                ]
+            ],
+            
+        ];
+
+        foreach ($arr as $key => $value) {
+            if (array_key_exists("perfil", $value)) {
+                $obj_perfil = $value['perfil'];
+                $label = $obj_perfil['label'];
+                if (array_key_exists($perfil, $perfiles)) {
+                    $column = $perfiles[$perfil][$label];
+                    $arr[$key] = $column;
+                } else {
+                    unset($arr[$key]);
+                }
+            }
+        }
+
+        return array_values($arr);
+    }
+    public static function columnasTablaTerminados($perfil = "cesvi")
+    {
+        $taller = [
+            "data" => PropsColumnas::getDataBase("Taller", "taller"),
+            "extras" => []
+        ];
+        $entrega =
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Entrega",
+                        "ic:round-photo-camera-back",
+                        "entrega"
+                    ),
+                ]
+            ];
+
+        $perfiles = [
+            "cesvi" => [
+                "taller" => $taller,
+                "entrega" => $entrega
+            ],
+            "taller" => [
+                "entrega" => $entrega
+            ],
+            "olx" => [
+                "taller" => $taller
+            ]
+        ];
+
+        $arr = [
+            [
+                "data" => PropsColumnas::getDataBase("Stock", "stock"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("VIN", "vin"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Marca", "marca"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Modelo", "modelo"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Año", "anio"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Color", "color"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
+                "extras" => []
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "taller"
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha de ingreso", ""),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos_ingreso"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha término", ""),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Revisión",
+                        "ic:round-photo-camera-back",
+                        "revision"
+                    ),
+                ]
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "entrega"
+                ]
+            ],
+
+        ];
+
+        foreach ($arr as $key => $value) {
+            if (array_key_exists("perfil", $value)) {
+                $obj_perfil = $value['perfil'];
+                $label = $obj_perfil['label'];
+                if (array_key_exists($perfil, $perfiles)) {
+                    $column = $perfiles[$perfil][$label];
+                    $arr[$key] = $column;
+                } else {
+                    unset($arr[$key]);
+                }
+            }
+        }
+
+        return array_values($arr);
+    }
+
 }

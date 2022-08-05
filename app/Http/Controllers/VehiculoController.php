@@ -26,15 +26,26 @@ class VehiculoController extends Controller
     {
         $params = $request->only(['_s']);
         $estatus = $params['_s'];
-        //$data = BitRegVehiculos::where("estatus", $estatus)->get();
-        $data = [];
+        $data = BitRegVehiculos::where("estatus", $estatus)->get();
+        //$data = [];
         //cesvi olx taller
         $tipo_columnas = [
             "por_asignar" => ColumnasFront::columnasTablaPorAsignar(),
+            "asignado" => ColumnasFront::columnasTablaAsignados(),
+            "ingresado" => ColumnasFront::columnasTablaEnTaller(),
+            "inspeccionado" => ColumnasFront::columnasTablaEnTaller(),
+            "terminado" => ColumnasFront::columnasTablaTerminados(),
+        ];
+        $titulo = [
+            "por_asignar" => "Por Asignar",
+            "asignado" => "Asignados",
+            "ingresado" => "En taller",
+            "inspeccionado" => "Terminados",
+            "terminado" => "Terminados",
         ];
         $columnas = $tipo_columnas[$estatus];
         $columns = TablaFront::getColumns($columnas);
-        $title_table = "Por asignar";
+        $title_table = $titulo[$estatus];
         $response = [
             "status" => 200,
             "status_info" => $params['_s'],
