@@ -19,6 +19,7 @@ $router->group(['prefix' => 'vehiculos'], function () use ($router) {
     $router->post('deletPza', ['uses' => 'VehiculoController@deletPza']);
     $router->post('AsignacionTaller',  ['uses' => 'VehiculoController@AsignacionTaller']);
     $router->post('IngresoVehTaller',  ['uses' => 'VehiculoController@IngresoVehTaller']);
+    $router->post('InspeccionCalidad',  ['uses' => 'VehiculoController@InspeccionCalidad']);
 });
 
 $router->group(['prefix' => 'Talleres'], function () use ($router) {

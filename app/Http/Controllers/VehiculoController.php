@@ -345,5 +345,33 @@ class VehiculoController extends Controller
          return response()->json(["message" => "Upload correcto", "status" => 201, "res" => $res], 201);
         
     }
-    
+
+    public function InspeccionCalidad(Request $request) {
+        $params = $request->all();
+        $arr = $params['parametros'];
+
+        $idRegVeh = $arr['idRegVeh'];
+        $dateTimeSelect = $arr['dateTimeSelect'];
+        $resultadoSelec = $arr['resultadoSelec'];
+        $fecEstatus = $dateTimeSelect; //Carbon::now('America/Mexico_City');
+        $estatus = "";
+        $idUserReg = "1";
+
+        if ($resultadoSelec == "no_aprobado") {
+            $estatus = "ingresado";
+            $this->insertLog($idRegVeh, "inspeccionado", $fecEstatus, $idUserReg, "", $resultadoSelec, "", "");
+        } else {
+            $estatus = "terminado";
+            $this->insertLog($idRegVeh, "inspeccionado", $fecEstatus, $idUserReg, "", $resultadoSelec, "", "");
+            $CamposUpdatet = ["estatus" => $estatus, "fec_terminado" => $fecEstatus];
+            $res = DB::table('bit_reg_vehiculos')
+                    ->where('id_reg_veh', $idRegVeh)
+                    ->update($CamposUpdatet);
+            $this->insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, "", "", "", "");
+        }
+
+
+        return response()->json(["message" => "Upload correcto", "status" => 201, "res" => "ok"], 201);
+    }
+
 }
