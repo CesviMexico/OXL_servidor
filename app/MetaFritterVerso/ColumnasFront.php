@@ -155,11 +155,10 @@ class ColumnasFront
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Fotos"),
+                "data" => PropsColumnas::getDataBase("", "Modal"),
                 "extras" => [
-                    PropsColumnas::getActions(
-                        5,
-                        "¿Editar pavone?",
+                    PropsColumnas::getModales(
+                        "ver más",
                         "ic:round-photo-camera-back"
                     ),
                 ]
