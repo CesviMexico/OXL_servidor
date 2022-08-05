@@ -123,8 +123,23 @@ class ColumnasFront
         return $arr;
     }
 
-    public static function columnasTablaPorAsignar()
+    public static function columnasTablaPorAsignar($perfil="cesvi")
     {
+        $perfiles = [
+            "cesvi" =>
+            [
+                "asignar" => [
+                    "data" => PropsColumnas::getDataBase("", "Modal"),
+                    "extras" => [
+                        PropsColumnas::getModales(
+                            "Asignar",
+                            "ic:round-photo-camera-back"
+                        ),
+                    ]
+                ]
+            ]
+        ];
+
         $arr = [
             [
                 "data" => PropsColumnas::getDataBase("Stock", "stock"),
@@ -145,11 +160,11 @@ class ColumnasFront
             [
                 "data" => PropsColumnas::getDataBase("Año", "anio"),
                 "extras" => []
-            ], 
+            ],
             [
                 "data" => PropsColumnas::getDataBase("Color", "color"),
                 "extras" => []
-            ], 
+            ],
             [
                 "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
                 "extras" => []
@@ -168,6 +183,12 @@ class ColumnasFront
                 "extras" => []
             ],
             [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "asignar"
+                ]
+            ],
+            [
                 "data" => PropsColumnas::getDataBase("", "Cancelar"),
                 "extras" => [
                     PropsColumnas::getActions(
@@ -178,6 +199,21 @@ class ColumnasFront
                 ]
             ],
         ];
-        return $arr;
+
+        foreach ($arr as $key => $value) {
+            if(array_key_exists("perfil", $value)){
+                $obj_perfil = $value['perfil'];
+                $label = $obj_perfil['label'];
+                if(array_key_exists($perfil, $perfiles)){
+                    $column = $perfiles[$perfil][$label];
+                    $arr[$key] = $column;
+                }
+                else{
+                    unset($arr[$key]);
+                }       
+            }
+        }
+
+        return array_values($arr);
     }
 }
