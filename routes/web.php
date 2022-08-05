@@ -24,3 +24,7 @@ $router->group(['prefix' => 'vehiculos'], function () use ($router) {
 $router->group(['prefix' => 'Talleres'], function () use ($router) {
     $router->get('',  ['uses' => 'Talleres@showCatTalleres']);   
 });
+
+$router->group(['prefix' => 'evidencias'], function () use ($router) {
+    $router->post('',  ['uses' => 'EvidenciaController@showBitEvidencias']);   
+});
