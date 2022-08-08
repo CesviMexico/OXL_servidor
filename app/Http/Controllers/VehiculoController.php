@@ -105,6 +105,13 @@ class VehiculoController extends Controller {
 
 
             return response()->json(["message" => "Update correcta", "status" => 201, "chechVin" => $chechVin], 201);
+        }else if($campo == "estatus"){
+            
+            $fecEstatus = Carbon::now('America/Mexico_City');
+            $idUserReg = "1";
+            $this->insertLog($idRegVeh, $valor, $fecEstatus, $idUserReg, "", "", "", "");
+            return response()->json(["message" => "Update correcta", "status" => 201,], 201);
+            
         } else {
             return response()->json(["message" => "Update correcta", "status" => 201,], 201);
         }
