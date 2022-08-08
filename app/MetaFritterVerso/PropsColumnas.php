@@ -206,11 +206,12 @@ class PropsColumnas
         $this->title = $title;
     }
 
-    public static function getDataBase($label, $value)
+    public static function getDataBase($label, $value, $option = false)
     {
         return [
             "label" => $label,
             "value" => $value,
+            "option" => $option
         ];
     }
 
@@ -319,8 +320,8 @@ class PropsColumnas
         return ["upload" => true, "actionUrl" => $actionUrl, "width" => $width . "px", "titleMSGC" => $titleMSGC, "titleMSGD" => $titleMSGD, "iconC" => $iconC, "iconD" => $iconD, "tipoFile" => $tipoFile, "multipleFile" => $multipleFile, "listType" => $listType];
     }
 
-    public static function getModales($titleTooltip, $icon, $tipoModal)
+    public static function getModales($titleTooltip, $content, $tipoModal, $type)
     {
-        return ["Modal" => true, "titleTooltip" => $titleTooltip, "icon" => $icon, "tipoModal" => $tipoModal];
+        return ["Modal" => true, "titleTooltip" => $titleTooltip, "content" => $content, "tipoModal" => $tipoModal, "type" => $type];
     }
 }

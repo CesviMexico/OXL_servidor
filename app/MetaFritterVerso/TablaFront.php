@@ -13,16 +13,16 @@ class TablaFront
     public static function getPropsTable($title)
     {
         return [
-            "pagination" => false,
-            "pageSize" => 15,
+            "pagination" => true,
+            "pageSize" => 10,
             "simplepage" => false,
             "positionBottom" => "bottomRight", // bottomLeft |bottomCenter|bottomRight
             "positionTop" => 'none', // topLeft |topCenter |topRight|
             "Title" => $title,
             "size" => 'small', //default | middle | small
             "bordered" => false,
-            "scrollX" => "100%",
-            "scrollY" => 300,
+            // "scrollX" => "100%",
+            // "scrollY" => 300,
             "IconAvatar" => 'mdi:cog-refresh-outline',
             "tableLayout" => "auto",
         ];
@@ -47,15 +47,16 @@ class TablaFront
     static function createColumn($objeto)
     {
         $data = $objeto['data'];
-        if(!empty($data['label'])){
+        if(!$data['option']){
             $values = [
                 "title" => $data['label'], 
                 "dataIndex" => $data['value'], 
                 "key" => $data['value'],
-                "width"=> "10%"
+                
             ];
         }else{
             $values = [
+                "title" => $data['label'], 
                 "key" => $data['value']
             ];
         }

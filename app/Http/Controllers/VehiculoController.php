@@ -9,21 +9,34 @@ use App\MetaFritterVerso\ColumnasFront;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class VehiculoController extends Controller {
+class VehiculoController extends Controller
+{
 
-    public function showAll() {
+    public function showAll()
+    {
         return response()->json(BitRegVehiculos::all());
     }
 
-    public function showOne($id) {
+    public function showOne($id)
+    {
         return response()->json(BitRegVehiculos::find($id));
-        
     }
 
-    public function showStatus(Request $request) {
+    public function showStatus(Request $request)
+    {
         $params = $request->only(['_s']);
         $estatus = $params['_s'];
-        $data = BitRegVehiculos::where("estatus", $estatus)->get();
+        $data = BitRegVehiculos::join('cat_talleres', 'bit_reg_vehiculos.id_taller_asignado', '=', 'cat_talleres.id_taller', 'left outer')
+            ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller')
+            ->where("bit_reg_vehiculos.estatus", $estatus)
+            ->get();
+
+        for ($i = 0; $i < sizeof($data); $i++) {
+            $countData = DB::table('bit_log_estatus')->where('id_reg_veh', $data[$i]['id_reg_veh'])->where('estatus', $estatus)->count();
+            $data[$i]['count_status'] =  $countData;
+        }
+
+
         //$data = [];
         //cesvi olx taller
         $tipo_columnas = [
@@ -32,6 +45,8 @@ class VehiculoController extends Controller {
             "ingresado" => ColumnasFront::columnasTablaEnTaller(),
             "inspeccionado" => ColumnasFront::columnasTablaEnTaller(),
             "terminado" => ColumnasFront::columnasTablaTerminados(),
+            "entregado" => ColumnasFront::columnasTablaEntregados(),
+            "cancelado" => ColumnasFront::columnasTablaCancelados(),
         ];
         $titulo = [
             "por_asignar" => "Por Asignar",
@@ -39,23 +54,25 @@ class VehiculoController extends Controller {
             "ingresado" => "En taller",
             "inspeccionado" => "Terminados",
             "terminado" => "Terminados",
+            "entregado" => "Entregados",
+            "cancelado" => "Cancelados",
         ];
         $columnas = $tipo_columnas[$estatus];
         $columns = TablaFront::getColumns($columnas);
         $title_table = $titulo[$estatus];
         $response = [
             "status" => 200,
-            "status_info" => $params['_s'],
             "data" => $data,
             "columns" => $columns,
-            "message" => "Info Actualizada",
+            "message" => "Información actualizada",
             "props_table" => TablaFront::getPropsTable($title_table),
             "type" => "success"
         ];
         return response()->json($response, 200);
     }
 
-    public function createRegVeh(Request $request) {
+    public function createRegVeh(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
         foreach ($arr as $value) {
@@ -73,7 +90,8 @@ class VehiculoController extends Controller {
         //$data = BitRegVehiculos::create($request->all());
     }
 
-    public function updateRegVeh(Request $request) {
+    public function updateRegVeh(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -83,8 +101,8 @@ class VehiculoController extends Controller {
         $CamposUpdatet = [$campo => $valor]; //$this->getInserts($field_name, $value);
 
         DB::table('bit_reg_vehiculos')
-                ->where('id_reg_veh', $idRegVeh)
-                ->update($CamposUpdatet);
+            ->where('id_reg_veh', $idRegVeh)
+            ->update($CamposUpdatet);
 
         if ($campo == "vin") {
 
@@ -100,25 +118,25 @@ class VehiculoController extends Controller {
                     $CamposUpdatet2 = ["marca" => "", "modelo" => "", "anio" => ""];
                 }
                 DB::table('bit_reg_vehiculos')
-                        ->where('id_reg_veh', $idRegVeh)
-                        ->update($CamposUpdatet2);
+                    ->where('id_reg_veh', $idRegVeh)
+                    ->update($CamposUpdatet2);
             }
 
 
             return response()->json(["message" => "Update correcta", "status" => 201, "chechVin" => $chechVin], 201);
-        }else if($campo == "estatus"){
-            
+        } else if ($campo == "estatus") {
+
             $fecEstatus = Carbon::now('America/Mexico_City');
             $idUserReg = "1";
             $this->insertLog($idRegVeh, $valor, $fecEstatus, $idUserReg, "", "", "", "");
             return response()->json(["message" => "Update correcta", "status" => 201,], 201);
-            
         } else {
             return response()->json(["message" => "Update correcta", "status" => 201,], 201);
         }
     }
 
-    public function addPzaCambio(Request $request) {
+    public function addPzaCambio(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -129,15 +147,16 @@ class VehiculoController extends Controller {
         DB::table("bit_piezas")->upsert($Camposinsert, ['id_bit_piezas']);
 
         $registros = DB::table('bit_piezas')
-                ->where('id_reg_veh', $idRegVeh)
-                ->where('tipo', "cambio")
-                ->where('estatus', "alta")
-                ->get(["id_bit_piezas", "pieza"]);
+            ->where('id_reg_veh', $idRegVeh)
+            ->where('tipo', "cambio")
+            ->where('estatus', "alta")
+            ->get(["id_bit_piezas", "pieza"]);
 
         return response()->json(["message" => "Update correcta", "status" => 201, "registros" => $registros], 201);
     }
 
-    public function addPzaRepar(Request $request) {
+    public function addPzaRepar(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -148,15 +167,16 @@ class VehiculoController extends Controller {
         DB::table("bit_piezas")->upsert($Camposinsert, ['id_bit_piezas']);
 
         $registros = DB::table('bit_piezas')
-                ->where('id_reg_veh', $idRegVeh)
-                ->where('tipo', "reparacion")
-                ->where('estatus', "alta")
-                ->get(["id_bit_piezas", "pieza"]);
+            ->where('id_reg_veh', $idRegVeh)
+            ->where('tipo', "reparacion")
+            ->where('estatus', "alta")
+            ->get(["id_bit_piezas", "pieza"]);
 
         return response()->json(["message" => "Update correcta", "status" => 201, "registros" => $registros], 201);
     }
 
-    public function WSVInPlusCat(Request $request) {
+    public function WSVInPlusCat(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -174,14 +194,14 @@ class VehiculoController extends Controller {
 
             $CamposUpdatet = ["marca" => $marca]; //$this->getInserts($field_name, $value);
             DB::table('bit_reg_vehiculos')
-                    ->where('id_reg_veh', $idRegVeh)
-                    ->update($CamposUpdatet);
+                ->where('id_reg_veh', $idRegVeh)
+                ->update($CamposUpdatet);
         } elseif ($catalogo == 'anio') {
             $data = "vin:,tp:$tveh,mr:$marca,md:$modelo";
             $CamposUpdatet = ["modelo" => $modelo]; //$this->getInserts($field_name, $value);
             DB::table('bit_reg_vehiculos')
-                    ->where('id_reg_veh', $idRegVeh)
-                    ->update($CamposUpdatet);
+                ->where('id_reg_veh', $idRegVeh)
+                ->update($CamposUpdatet);
         }
 
 
@@ -190,7 +210,8 @@ class VehiculoController extends Controller {
         return response()->json(["message" => "Consulta correcta", "status" => 201, "responseWSVin" => $responseWSVin], 201);
     }
 
-    public function deletPza(Request $request) {
+    public function deletPza(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -200,22 +221,23 @@ class VehiculoController extends Controller {
 
         $CamposUpdatet = ["estatus" => "baja"]; //$this->getInserts($field_name, $value);
         DB::table('bit_piezas')
-                ->where('id_bit_piezas', $idBitPiezas)
-                ->update($CamposUpdatet);
+            ->where('id_bit_piezas', $idBitPiezas)
+            ->update($CamposUpdatet);
 
         //DB::table('bit_piezas')->where('id_bit_piezas', $idBitPiezas)->delete();
 
 
         $registros = DB::table('bit_piezas')
-                ->where('id_reg_veh', $idRegVeh)
-                ->where('tipo', $tipo)
-                ->where('estatus', "alta")
-                ->get(["id_bit_piezas", "pieza"]);
+            ->where('id_reg_veh', $idRegVeh)
+            ->where('tipo', $tipo)
+            ->where('estatus', "alta")
+            ->get(["id_bit_piezas", "pieza"]);
 
         return response()->json(["message" => "Update correcta", "status" => 201, "registros" => $registros], 201);
     }
 
-    public function addFiles(Request $request) {
+    public function addFiles(Request $request)
+    {
         if ($request->file('file_vehiculo')->isValid()) {
             $params = $request->all();
             $idRegVeh = $params['idRegVeh'];
@@ -233,7 +255,8 @@ class VehiculoController extends Controller {
         return response()->json(["message" => "Upload correcto", "status" => 201, "path" => $destinationPath, "filename" => $fileName], 201);
     }
 
-    public function deletefiles(Request $request) {
+    public function deletefiles(Request $request)
+    {
 
         $params = $request->all();
         $arr = $params['parametros'];
@@ -246,7 +269,8 @@ class VehiculoController extends Controller {
         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => $res], 201);
     }
 
-    public function insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, $idAsignado, $ResultInspeccion, $EntregadoA, $Comentario) {
+    public function insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, $idAsignado, $ResultInspeccion, $EntregadoA, $Comentario)
+    {
         $fec_actual = Carbon::now('America/Mexico_City'); //date("Y-m-d H:i:s");
         if ($estatus == "asignado") {
             $Camposinsert = [
@@ -273,7 +297,8 @@ class VehiculoController extends Controller {
         //return $data;
     }
 
-    public function WSVinPlus($cadena) {
+    public function WSVinPlus($cadena)
+    {
 
         $autenticacion = base64_encode("aolx:tgr652");
         //$data = base64_encode("vin:JM1BN1V34J1155231,tp:2,mr:,md:");
@@ -304,7 +329,8 @@ class VehiculoController extends Controller {
         }
     }
 
-    public function AsignacionTaller(Request $request) {
+    public function AsignacionTaller(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -317,15 +343,16 @@ class VehiculoController extends Controller {
 
         $CamposUpdatet = ["estatus" => $estatus, "fec_asignado" => $fecEstatus, "id_taller_asignado" => $idTallerAsignado];
         $res = DB::table('bit_reg_vehiculos')
-                ->where('id_reg_veh', $idRegVeh)
-                ->update($CamposUpdatet);
+            ->where('id_reg_veh', $idRegVeh)
+            ->update($CamposUpdatet);
 
         $this->insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, $idTallerAsignado, "", "", "");
 
         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => $res], 201);
     }
 
-    public function IngresoVehTaller(Request $request) {
+    public function IngresoVehTaller(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -338,15 +365,16 @@ class VehiculoController extends Controller {
 
         $CamposUpdatet = ["estatus" => $estatus, "fec_ingreso" => $fecEstatus];
         $res = DB::table('bit_reg_vehiculos')
-                ->where('id_reg_veh', $idRegVeh)
-                ->update($CamposUpdatet);
+            ->where('id_reg_veh', $idRegVeh)
+            ->update($CamposUpdatet);
 
         $this->insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, "", "", "", "");
 
         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => $res], 201);
     }
 
-    public function InspeccionCalidad(Request $request) {
+    public function InspeccionCalidad(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -365,8 +393,8 @@ class VehiculoController extends Controller {
             $this->insertLog($idRegVeh, "inspeccionado", $fecEstatus, $idUserReg, "", $resultadoSelec, "", "");
             $CamposUpdatet = ["estatus" => $estatus, "fec_terminado" => $fecEstatus];
             $res = DB::table('bit_reg_vehiculos')
-                    ->where('id_reg_veh', $idRegVeh)
-                    ->update($CamposUpdatet);
+                ->where('id_reg_veh', $idRegVeh)
+                ->update($CamposUpdatet);
             $this->insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, "", "", "", "");
         }
 
@@ -374,7 +402,8 @@ class VehiculoController extends Controller {
         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => "ok"], 201);
     }
 
-    public function Entregado(Request $request) {
+    public function Entregado(Request $request)
+    {
         $params = $request->all();
         $arr = $params['parametros'];
 
@@ -385,15 +414,14 @@ class VehiculoController extends Controller {
         $fecEstatus = $dateTimeSelect; //Carbon::now('America/Mexico_City');
         $estatus = "entregado";
         $idUserReg = "1";
-        
-       
-        $CamposUpdatet = ["estatus" => $estatus, "fec_entrega" => $fecEstatus , "entregado_a"=>$entregadoA];
+
+
+        $CamposUpdatet = ["estatus" => $estatus, "fec_entrega" => $fecEstatus, "entregado_a" => $entregadoA];
         $res = DB::table('bit_reg_vehiculos')
-                ->where('id_reg_veh', $idRegVeh)
-                ->update($CamposUpdatet);
+            ->where('id_reg_veh', $idRegVeh)
+            ->update($CamposUpdatet);
         $this->insertLog($idRegVeh, $estatus, $fecEstatus, $idUserReg, "", "", $entregadoA, "");
 
         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => "ok"], 201);
     }
-
 }
