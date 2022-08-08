@@ -37,7 +37,7 @@ class VehiculoController extends Controller {
             "por_asignar" => "Por Asignar",
             "asignado" => "Asignados",
             "ingresado" => "En taller",
-            "inspeccionado" => "Terminados",
+            "inspeccionado" => "Inspección",
             "terminado" => "Terminados",
         ];
         $columnas = $tipo_columnas[$estatus];

@@ -21,6 +21,7 @@ $router->group(['prefix' => 'vehiculos'], function () use ($router) {
     $router->post('IngresoVehTaller',  ['uses' => 'VehiculoController@IngresoVehTaller']);
     $router->post('InspeccionCalidad',  ['uses' => 'VehiculoController@InspeccionCalidad']);
     $router->post('Entregado',  ['uses' => 'VehiculoController@Entregado']);
+    
 });
 
 $router->group(['prefix' => 'Talleres'], function () use ($router) {
@@ -29,4 +30,8 @@ $router->group(['prefix' => 'Talleres'], function () use ($router) {
 
 $router->group(['prefix' => 'evidencias'], function () use ($router) {
     $router->post('',  ['uses' => 'EvidenciaController@showBitEvidencias']);   
+});
+
+$router->group(['prefix' => 'estatus'], function () use ($router) {
+   $router->get('inspecciones/{id}',  ['uses' => 'BitLogEstatusControllers@showInspecciones']);
 });

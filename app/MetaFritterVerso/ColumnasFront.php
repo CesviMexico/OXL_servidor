@@ -615,5 +615,31 @@ class ColumnasFront
 
         return array_values($arr);
     }
+    
+    
+    
+    public static function columnasTablaInspecciones()
+    {
+        $arr = [
+            [
+                "data" => PropsColumnas::getDataBase("Estatus", "estatus"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha", "fec_estatus"),
+                "extras" => [
+                    PropsColumnas::getTipoFechaTime(),
+                    PropsColumnas::getOrderDate()
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Resultado", "result_inspeccion"),
+                "extras" => []
+            ]
+
+        ];
+        return $arr;
+    }
+    
 
 }

@@ -28,6 +28,27 @@ class BitLogEstatusControllers extends Controller
         ];
         return response()->json($response);
     }
+    
+    public function showInspecciones($id)
+    {
+        //$data = BitLogEstatus::all();
+        
+        $data = BitLogEstatus::where("estatus", 'inspeccionado')->where("id_reg_veh",$id )->get();
+        
+        $columnas = ColumnasFront::columnasTablaInspecciones();
+        $columns = TablaFront::getColumns($columnas);
+
+        $response = [
+            "status" => 200,
+            "data" => $data,
+            "columns" => $columns,
+            "message" => "Info Actualizada",
+            "props_table" => TablaFront::getPropsTable("Tabla de inspecciones"),
+            "type" => "success"
+        ];
+        return response()->json($response);
+    }
+    
 
     public function showOne($id)
     {
