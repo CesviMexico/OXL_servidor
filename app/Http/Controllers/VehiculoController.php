@@ -17,6 +17,7 @@ class VehiculoController extends Controller {
 
     public function showOne($id) {
         return response()->json(BitRegVehiculos::find($id));
+        
     }
 
     public function showStatus(Request $request) {
