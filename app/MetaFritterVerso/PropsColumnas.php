@@ -321,6 +321,6 @@ class PropsColumnas
 
     public static function getModales($titleTooltip, $icon, $tipoModal)
     {
-        return ["Modal" => true, "titleTooltip" => $titleTooltip, "icon" => $icon, "tipoModal" => $tipoModal];
+        return ["Modal" => true, "titleTooltip" => $titleTooltip, "icon" => $icon, "tipoModal" => $tipoModal,"title" => $titleTooltip];
     }
 }

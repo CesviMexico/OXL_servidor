@@ -134,6 +134,7 @@ class ColumnasFront
                             "Asignar",
                             "ic:round-photo-camera-back",
                             "asignacion"
+                            
                         ),
                     ]
                 ]
@@ -360,6 +361,7 @@ class ColumnasFront
                         "Inspección",
                         "ic:round-photo-camera-back",
                         "inspeccion"
+                            
                     ),
                 ]
             ];
@@ -452,8 +454,8 @@ class ColumnasFront
                 "extras" => [
                     PropsColumnas::getModales(
                         "Revisión",
-                        "ic:round-photo-camera-back",
-                        "revision"
+                        "null",
+                        "id_reg_veh"  
                     ),
                 ]
             ],
@@ -584,7 +586,7 @@ class ColumnasFront
                 "extras" => [
                     PropsColumnas::getModales(
                         "Revisión",
-                        "ic:round-photo-camera-back",
+                        "null",                         
                         "revision"
                     ),
                 ]
