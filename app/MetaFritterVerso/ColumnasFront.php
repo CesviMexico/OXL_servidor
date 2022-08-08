@@ -128,13 +128,13 @@ class ColumnasFront
             "cesvi" =>
             [
                 "asignar" => [
-                    "data" => PropsColumnas::getDataBase("", "Modal"),
+                    "data" => PropsColumnas::getDataBase("Asignar", "Modal", true),
                     "extras" => [
                         PropsColumnas::getModales(
                             "Asignar",
-                            "ic:round-photo-camera-back",
-                            "asignacion"
-                            
+                            "Asignar",
+                            "asignacion",
+                            "text"
                         ),
                     ]
                 ]
@@ -171,21 +171,22 @@ class ColumnasFront
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                         "ver más",
                         "ic:round-photo-camera-back",
-                        "fotos"
+                        "fotos",
+                        "icon"
                     ),
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fecha de registro", ""),
+                "data" => PropsColumnas::getDataBase("Fecha de registro", "fec_registro"),
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Cancelar"),
+                "data" => PropsColumnas::getDataBase("Cancelar", "Cancelar", true),
                 "extras" => [
                     PropsColumnas::getActions(
                         5,
@@ -220,11 +221,11 @@ class ColumnasFront
     public static function columnasTablaAsignados($perfil = "cesvi")
     {
         $taller = [
-            "data" => PropsColumnas::getDataBase("Taller", "taller"),
+            "data" => PropsColumnas::getDataBase("Taller", "nombre_taller"),
             "extras" => []
         ];
         $cancelar = [
-            "data" => PropsColumnas::getDataBase("", "Cancelar"),
+            "data" => PropsColumnas::getDataBase("Cancelar", "Cancelar", true),
             "extras" => [
                 PropsColumnas::getActions(
                     5,
@@ -235,12 +236,13 @@ class ColumnasFront
         ];
         $ingreso =
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Ingreso", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                         "Ingreso",
-                        "ic:round-photo-camera-back",
-                        "ingreso"
+                        "Ingreso",
+                        "ingreso",
+                        "text"
                     ),
                 ]
             ];
@@ -295,29 +297,30 @@ class ColumnasFront
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
-                        "ver más",
+                        "Ver más",
                         "ic:round-photo-camera-back",
-                        "fotos"
+                        "fotos",
+                        "icon"
                     ),
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fecha de registro", ""),
+                "data" => PropsColumnas::getDataBase("Fecha de asigación", "fec_asignado"),
                 "extras" => []
             ],
             [
                 "perfil" => [
                     "value" => "si",
-                    "label" => "cancelar"
+                    "label" => "ingreso"
                 ]
             ],
             [
                 "perfil" => [
                     "value" => "si",
-                    "label" => "ingreso"
+                    "label" => "cancelar"
                 ]
             ]
         ];
@@ -340,11 +343,11 @@ class ColumnasFront
     public static function columnasTablaEnTaller($perfil = "cesvi")
     {
         $taller = [
-            "data" => PropsColumnas::getDataBase("Taller", "taller"),
+            "data" => PropsColumnas::getDataBase("Taller", "nombre_taller"),
             "extras" => []
         ];
         $cancelar = [
-            "data" => PropsColumnas::getDataBase("", "Cancelar"),
+            "data" => PropsColumnas::getDataBase("Cancelar", "Cancelar", true),
             "extras" => [
                 PropsColumnas::getActions(
                     5,
@@ -355,13 +358,13 @@ class ColumnasFront
         ];
         $inspeccion =
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Inspección", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                         "Inspección",
-                        "ic:round-photo-camera-back",
-                        "inspeccion"
-                            
+                        "Inspección",
+                        "inspeccion",
+                        "text"
                     ),
                 ]
             ];
@@ -416,33 +419,35 @@ class ColumnasFront
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
-                        "ver más",
+                        "Ver más",
                         "ic:round-photo-camera-back",
-                        "fotos"
+                        "fotos",
+                        "icon"
                     ),
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fecha de ingreso", ""),
+                "data" => PropsColumnas::getDataBase("Fecha de asignación", "fec_asignado"),
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Fotos Ingreso", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                         "ver más",
                         "ic:round-photo-camera-back",
-                        "fotos_ingreso"
+                        "fotos_ingreso",
+                        "icon"
                     ),
                 ]
             ],
-            [
-                "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
-                "extras" => []
-            ],
+            // [
+            //     "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
+            //     "extras" => []
+            // ],
             [
                 "perfil" => [
                     "value" => "si",
@@ -450,12 +455,13 @@ class ColumnasFront
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Revisión", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                         "Revisión",
-                        "null",
-                        "id_reg_veh"  
+                        "count_status",
+                        "revision",
+                        "field"
                     ),
                 ]
             ],
@@ -465,7 +471,7 @@ class ColumnasFront
                     "label" => "cancelar"
                 ]
             ],
-            
+
         ];
 
         foreach ($arr as $key => $value) {
@@ -486,17 +492,18 @@ class ColumnasFront
     public static function columnasTablaTerminados($perfil = "cesvi")
     {
         $taller = [
-            "data" => PropsColumnas::getDataBase("Taller", "taller"),
+            "data" => PropsColumnas::getDataBase("Taller", "nombre_taller"),
             "extras" => []
         ];
         $entrega =
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Entrega", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                         "Entrega",
-                        "ic:round-photo-camera-back",
-                        "entrega"
+                        "Entrega",
+                        "entrega",
+                        "text"
                     ),
                 ]
             ];
@@ -550,26 +557,28 @@ class ColumnasFront
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
-                        "ver más",
+                        "Ver más",
                         "ic:round-photo-camera-back",
-                        "fotos"
+                        "fotos",
+                        "icon"
                     ),
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fecha de ingreso", ""),
+                "data" => PropsColumnas::getDataBase("Fecha de ingreso", "fec_ingreso"),
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Fotos ingreso", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
-                        "ver más",
+                        "Ver más",
                         "ic:round-photo-camera-back",
-                        "fotos_ingreso"
+                        "fotos_ingreso",
+                        "icon"
                     ),
                 ]
             ],
@@ -578,16 +587,17 @@ class ColumnasFront
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fecha término", ""),
+                "data" => PropsColumnas::getDataBase("Fecha término", "fec_terminado"),
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("", "Modal"),
+                "data" => PropsColumnas::getDataBase("Revisión", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                         "Revisión",
-                        "null",                         
-                        "revision"
+                        "count_status",
+                        "revision",
+                        "field"
                     ),
                 ]
             ],
@@ -641,5 +651,160 @@ class ColumnasFront
         return $arr;
     }
     
+
+    public static function columnasTablaEntregados($perfil = "cesvi")
+    {
+
+        $arr = [
+            [
+                "data" => PropsColumnas::getDataBase("Stock", "stock"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("VIN", "vin"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Marca", "marca"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Modelo", "modelo"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Año", "anio"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Color", "color"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Taller", "nombre_taller"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos",
+                        "icon"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha de ingreso", "fec_ingreso"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fotos ingreso", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos_ingreso",
+                        "icon"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha término", "fec_terminado"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha de entrega", "fec_entrega"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fotos entrega", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos_entrega",
+                        "icon"
+                    ),
+                ]
+            ],
+           
+            
+
+        ];
+
+        return $arr;
+    }
+
+    public static function columnasTablaCancelados($perfil = "cesvi")
+    {
+
+        $arr = [
+            [
+                "data" => PropsColumnas::getDataBase("Stock", "stock"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("VIN", "vin"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Marca", "marca"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Modelo", "modelo"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Año", "anio"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Color", "color"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Taller", "nombre_taller"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                        "Ver más",
+                        "ic:round-photo-camera-back",
+                        "fotos",
+                        "icon"
+                    ),
+                ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha de asignación", "fec_asignado"),
+                "extras" => []
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Motivo", ""),
+                "extras" => []
+            ],
+            
+
+        ];
+
+        return $arr;
+    }
 
 }
