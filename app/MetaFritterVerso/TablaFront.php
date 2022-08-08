@@ -13,16 +13,16 @@ class TablaFront
     public static function getPropsTable($title)
     {
         return [
-            "pagination" => false,
-            "pageSize" => 15,
+            "pagination" => true,
+            "pageSize" => 10,
             "simplepage" => false,
             "positionBottom" => "bottomRight", // bottomLeft |bottomCenter|bottomRight
             "positionTop" => 'none', // topLeft |topCenter |topRight|
             "Title" => $title,
             "size" => 'small', //default | middle | small
             "bordered" => false,
-            "scrollX" => "100%",
-            "scrollY" => 300,
+            //"scrollX" => "1000px",
+            //"scrollY" => 300,
             "IconAvatar" => 'mdi:cog-refresh-outline',
             "tableLayout" => "auto",
         ];
