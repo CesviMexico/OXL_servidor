@@ -22,7 +22,7 @@ class HelperDate
             return null;
         }
         $reales = 0;
-        for ($n = 1; $n <= $dias + 1; $n++) {
+        for ($n = 1; $n <= $dias; $n++) {
             do {
                 $reales++;
                 $fecha = HelperDate::sumarDiasNaturales($fecha, 1);

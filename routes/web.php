@@ -36,4 +36,13 @@ $router->group(['prefix' => 'estatus'], function () use ($router) {
    $router->get('inspecciones/{id}',  ['uses' => 'BitLogEstatusControllers@showInspecciones']);
 });
 
+$router->group(['prefix' => 'catalogosFormularios'], function () use ($router) {
+   $router->get('',  ['uses' => 'VehiculoController@catalogosFormularios']);
+});
+
+
+$router->group(['prefix' => 'prueba'], function () use ($router) {
+   $router->get('',  ['uses' => 'VehiculoController@PruebaFechas']);
+});
+
 

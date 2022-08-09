@@ -173,22 +173,33 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de registro", "fec_registro"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Hra. trascurridas", "time_por_asignado"),
-                "extras" => []
+                "extras" => [PropsColumnas::getAlign('center')]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Cancelar", "Cancelar", true),
+                "data" => PropsColumnas::getDataBase("Cancelar", "Modal", true),
                 "extras" => [
-                    PropsColumnas::getActions(
-                            5,
-                            "¿Cancelar?",
-                            "mdi:table-cancel"
+                    PropsColumnas::getModales(
+                            "ver más",
+                            "mdi:table-cancel",
+                            "cancelar",
+                            "icon"
                     ),
                 ]
             ],
+//            [
+//                "data" => PropsColumnas::getDataBase("Cancelar", "Cancelar", true),
+//                "extras" => [
+//                    PropsColumnas::getActions(
+//                            5,
+//                            "¿Cancelar?",
+//                            "mdi:table-cancel"
+//                    ),
+//                ]
+//            ],
             [
                 "perfil" => [
                     "value" => "si",
@@ -225,15 +236,16 @@ class ColumnasFront {
             "extras" => []
         ];
         $cancelar = [
-            "data" => PropsColumnas::getDataBase("Cancelar", "Cancelar", true),
-            "extras" => [
-                PropsColumnas::getActions(
-                        5,
-                        "¿Cancelar?",
-                        "mdi:table-cancel"
-                ),
-            ]
-        ];
+                "data" => PropsColumnas::getDataBase("Cancelar", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "ver más",
+                            "mdi:table-cancel",
+                            "cancelar",
+                            "icon"
+                    ),
+                ]
+            ];
         $ingreso = [
             "data" => PropsColumnas::getDataBase("Ingreso", "Modal", true),
             "extras" => [
@@ -249,8 +261,7 @@ class ColumnasFront {
         $perfiles = [
             "cesvi" => [
                 "cancelar" => $cancelar,
-                "taller" => $taller,
-                "ingreso" => $ingreso
+                "taller" => $taller
             ],
             "taller" => [
                 "ingreso" => $ingreso
@@ -324,11 +335,11 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de asigación", "fec_asignado"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Hra. trascurridas", "time_asignado"),
-                "extras" => []
+                "extras" => [PropsColumnas::getAlign('center')]
             ],
             [
                 "perfil" => [
@@ -370,15 +381,16 @@ class ColumnasFront {
             "extras" => []
         ];
         $cancelar = [
-            "data" => PropsColumnas::getDataBase("Cancelar", "Cancelar", true),
-            "extras" => [
-                PropsColumnas::getActions(
-                        5,
-                        "¿Cancelar?",
-                        "mdi:table-cancel"
-                ),
-            ]
-        ];
+                "data" => PropsColumnas::getDataBase("Cancelar", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "ver más",
+                            "mdi:table-cancel",
+                            "cancelar",
+                            "icon"
+                    ),
+                ]
+            ];
         $inspeccion = [
             "data" => PropsColumnas::getDataBase("Inspección", "Modal", true),
             "extras" => [
@@ -394,8 +406,7 @@ class ColumnasFront {
         $perfiles = [
             "cesvi" => [
                 "cancelar" => $cancelar,
-                "taller" => $taller,
-                "inspeccion" => $inspeccion
+                "taller" => $taller
             ],
             "taller" => [
                 "inspeccion" => $inspeccion
@@ -469,11 +480,11 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de ingreso", "fec_ingreso"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Hras. trascurridas", "time_ingreso"),
-                "extras" => []
+                "extras" => [PropsColumnas::getAlign('center')]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fotos ingreso", "Modal", true),
@@ -487,8 +498,8 @@ class ColumnasFront {
                 ]
             ],
              [
-                 "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
-                 "extras" => []
+                 "data" => PropsColumnas::getDataBase("Fecha promesa", "fec_promesa"),
+                 "extras" => [PropsColumnas::getTipoFecha()]
              ],
             [
                 "perfil" => [
@@ -554,8 +565,7 @@ class ColumnasFront {
 
         $perfiles = [
             "cesvi" => [
-                "taller" => $taller,
-                "entrega" => $entrega
+                "taller" => $taller                
             ],
             "taller" => [
                 "entrega" => $entrega
@@ -629,7 +639,7 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de ingreso", "fec_ingreso"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fotos ingreso", "Modal", true),
@@ -643,16 +653,16 @@ class ColumnasFront {
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("Fecha promesa", "fec_promesa"),
+                "extras" => [PropsColumnas::getTipoFecha()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha término", "fec_terminado"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Hras trascurridas", "time_termino"),
-                "extras" => []
+                "extras" => [PropsColumnas::getAlign('center')]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Revisión", "Modal", true),
@@ -778,7 +788,7 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de ingreso", "fec_ingreso"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fotos ingreso", "Modal", true),
@@ -792,16 +802,16 @@ class ColumnasFront {
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("Fecha promesa", "fec_promesa"),
+                "extras" => [PropsColumnas::getTipoFecha()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha término", "fec_terminado"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de entrega", "fec_entrega"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fotos entrega", "Modal", true),
@@ -867,10 +877,10 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de asignación", "fec_asignado"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Motivo", ""),
+                "data" => PropsColumnas::getDataBase("Motivo", "motivo_cancelacion"),
                 "extras" => []
             ],
         ];
@@ -942,7 +952,7 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de ingreso", "fec_ingreso"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fotos ingreso", "Modal", true),
@@ -956,16 +966,16 @@ class ColumnasFront {
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fecha promesa", ""),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("Fecha promesa", "fec_promesa"),
+                "extras" => [PropsColumnas::getTipoFecha()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha término", "fec_terminado"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de entrega", "fec_entrega"),
-                "extras" => []
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fotos entrega", "Modal", true),
