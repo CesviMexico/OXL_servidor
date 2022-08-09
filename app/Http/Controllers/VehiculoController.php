@@ -18,10 +18,10 @@ class VehiculoController extends Controller {
 
     public function showOne($id) {
         return response()->json(
-                BitRegVehiculos::join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
-                ->select('bit_reg_vehiculos.*', 'cat_tipo_danio.dias_habiles')
-                ->find($id)
-                );
+                        BitRegVehiculos::join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
+                                ->select('bit_reg_vehiculos.*', 'cat_tipo_danio.dias_habiles')
+                                ->find($id)
+        );
     }
 
     public function showStatus(Request $request) {
@@ -32,72 +32,69 @@ class VehiculoController extends Controller {
         $UsrLoging = $params['UsrLoging'];
         $idTaller = DB::table('cat_usuario')->where('usuario', $UsrLoging)->where('estatus', 'alta')->get(['id_taller']);
         $idTaller = $idTaller[0]->id_taller;
-        
-        $date_actual = Carbon::now('America/Mexico_City');        
+
+        $date_actual = Carbon::now('America/Mexico_City');
         $data = [];
-        
-        if($estatus === "historico"){
-            
-            if($perfil == 'taller'){
+
+        if ($estatus === "historico") {
+
+            if ($perfil == 'taller') {
                 $data = BitRegVehiculos::join('cat_talleres', 'bit_reg_vehiculos.id_taller_asignado', '=', 'cat_talleres.id_taller', 'left outer')
-                ->join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
-                ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller','cat_tipo_danio.tipo_danio',
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_registro,'" . $date_actual . "' )AS time_por_asignado"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino"),
-                        DB::raw("if(bit_reg_vehiculos.estatus = 'por_asignar', 'por asignar', "
-                              . "if(bit_reg_vehiculos.estatus = 'ingresado', 'en taller', bit_reg_vehiculos.estatus)) as estatus_historico")
-                )
-                ->where("bit_reg_vehiculos.estatus", "<>" , 'cancelado')
-                ->where("bit_reg_vehiculos.id_taller_asignado", $idTaller)
-                ->get();
-            }else{
+                        ->join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
+                        ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller', 'cat_tipo_danio.tipo_danio',
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_registro,'" . $date_actual . "' )AS time_por_asignado"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino"),
+                                DB::raw("if(bit_reg_vehiculos.estatus = 'por_asignar', 'por asignar', "
+                                        . "if(bit_reg_vehiculos.estatus = 'ingresado', 'en taller', bit_reg_vehiculos.estatus)) as estatus_historico")
+                        )
+                        ->where("bit_reg_vehiculos.estatus", "<>", 'cancelado')
+                        ->where("bit_reg_vehiculos.id_taller_asignado", $idTaller)
+                        ->get();
+            } else {
                 $data = BitRegVehiculos::join('cat_talleres', 'bit_reg_vehiculos.id_taller_asignado', '=', 'cat_talleres.id_taller', 'left outer')
-                ->join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
-                ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller','cat_tipo_danio.tipo_danio',
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_registro,'" . $date_actual . "' )AS time_por_asignado"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino"),
-                        DB::raw("if(bit_reg_vehiculos.estatus = 'por_asignar', 'por asignar', "
-                              . "if(bit_reg_vehiculos.estatus = 'ingresado', 'en taller', bit_reg_vehiculos.estatus)) as estatus_historico")
-                )
-                ->where("bit_reg_vehiculos.estatus", "<>" , 'cancelado')
-                ->get();
+                        ->join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
+                        ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller', 'cat_tipo_danio.tipo_danio',
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_registro,'" . $date_actual . "' )AS time_por_asignado"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino"),
+                                DB::raw("if(bit_reg_vehiculos.estatus = 'por_asignar', 'por asignar', "
+                                        . "if(bit_reg_vehiculos.estatus = 'ingresado', 'en taller', bit_reg_vehiculos.estatus)) as estatus_historico")
+                        )
+                        ->where("bit_reg_vehiculos.estatus", "<>", 'cancelado')
+                        ->get();
             }
-            
-            
-        }else{
-            
-            if($perfil == 'taller'){
+        } else {
+
+            if ($perfil == 'taller') {
                 $data = BitRegVehiculos::join('cat_talleres', 'bit_reg_vehiculos.id_taller_asignado', '=', 'cat_talleres.id_taller', 'left outer')
-                ->join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')                        
-                ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller','cat_tipo_danio.tipo_danio',
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_registro,'" . $date_actual . "' )AS time_por_asignado"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino")
-                )
-                ->where("bit_reg_vehiculos.estatus", $estatus)
-                ->where("bit_reg_vehiculos.id_taller_asignado", $idTaller)
-                ->get();
-            }else{
+                        ->join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
+                        ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller', 'cat_tipo_danio.tipo_danio',
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_registro,'" . $date_actual . "' )AS time_por_asignado"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino")
+                        )
+                        ->where("bit_reg_vehiculos.estatus", $estatus)
+                        ->where("bit_reg_vehiculos.id_taller_asignado", $idTaller)
+                        ->get();
+            } else {
                 $data = BitRegVehiculos::join('cat_talleres', 'bit_reg_vehiculos.id_taller_asignado', '=', 'cat_talleres.id_taller', 'left outer')
-                                       ->join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
-                ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller','cat_tipo_danio.tipo_danio',
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_registro,'" . $date_actual . "' )AS time_por_asignado"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
-                        DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino")
-                )
-                ->where("bit_reg_vehiculos.estatus", $estatus)
-                ->get();
+                        ->join('cat_tipo_danio', 'bit_reg_vehiculos.id_tipo_danio', '=', 'cat_tipo_danio.id_tipo_danio', 'left outer')
+                        ->select('bit_reg_vehiculos.*', 'cat_talleres.nombre_taller', 'cat_tipo_danio.tipo_danio',
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_registro,'" . $date_actual . "' )AS time_por_asignado"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
+                                DB::raw("TIMESTAMPDIFF(hour, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino")
+                        )
+                        ->where("bit_reg_vehiculos.estatus", $estatus)
+                        ->get();
             }
-            
         }
-        
-        
+
+
 
         for ($i = 0; $i < sizeof($data); $i++) {
             $countData = DB::table('bit_log_estatus')->where('id_reg_veh', $data[$i]['id_reg_veh'])->where('estatus', 'inspeccionado')->count();
@@ -134,7 +131,7 @@ class VehiculoController extends Controller {
 
         //$data = [];
         //cesvi olx taller
-        $tipo_columnas = [                                            
+        $tipo_columnas = [
             "por_asignar" => ColumnasFront::columnasTablaPorAsignar($perfil),
             "asignado" => ColumnasFront::columnasTablaAsignados($perfil),
             "ingresado" => ColumnasFront::columnasTablaEnTaller($perfil),
@@ -164,7 +161,6 @@ class VehiculoController extends Controller {
             "message" => "Información actualizada",
             "props_table" => TablaFront::getPropsTable($title_table),
             "type" => "success",
-            
         ];
         return response()->json($response, 200);
     }
@@ -173,18 +169,23 @@ class VehiculoController extends Controller {
         $params = $request->all();
         $arr = $params['parametros'];
         foreach ($arr as $value) {
-            $date = Carbon::now('America/Mexico_City');
-            $Camposinsert = ["stock" => $value, "fec_registro" => $date]; //$this->getInserts($field_name, $value);
-            DB::table("bit_reg_vehiculos")->upsert($Camposinsert, ['id_reg_veh']);
-            $idRegVeh = BitRegVehiculos::latest('id_reg_veh')->first();
 
-            //$date = Carbon::parse('2022-08-02 10:11:00');
+            $CountStock = DB::table('bit_reg_vehiculos')->where('stock', $value)->where('estatus', '<>', 'cancelado')->count();
 
-
-            $this->insertLog($idRegVeh->id_reg_veh, "Por asignar", $date, "1", "", "", "", "");
+            if ($CountStock == '0') {
+                $date = Carbon::now('America/Mexico_City');
+                $Camposinsert = ["stock" => $value, "fec_registro" => $date]; //$this->getInserts($field_name, $value);
+                DB::table("bit_reg_vehiculos")->upsert($Camposinsert, ['id_reg_veh']);
+                $idRegVeh = BitRegVehiculos::latest('id_reg_veh')->first();
+                //$date = Carbon::parse('2022-08-02 10:11:00');
+                $this->insertLog($idRegVeh->id_reg_veh, "Por asignar", $date, "1", "", "", "", "");
+                return response()->json(["message" => "Creacion correcta", "status" => 201, "idRegVeh" => $idRegVeh->id_reg_veh, "CountStock"=> $CountStock], 201);
+            } else {
+                return response()->json(["message" => "El Stock ya existe", "status" => 201, "idRegVeh" => '0', "CountStock"=> $CountStock], 201);
+            }
         }
 
-        return response()->json(["message" => "Creacion correcta", "status" => 201, "idRegVeh" => $idRegVeh->id_reg_veh,], 201);
+        
         //$data = BitRegVehiculos::create($request->all());
     }
 
@@ -195,17 +196,17 @@ class VehiculoController extends Controller {
         $idRegVeh = $arr['idRegVeh'];
         $valor = $arr['valor'];
         $campo = $arr['campo'];
-        
+
         $motivo = "";
         $CamposUpdatet = []; //$this->getInserts($field_name, $value);
-        
+
         if ($campo == "estatus" && $valor == 'cancelado') {
             $motivo = $arr['motivo'];
             $CamposUpdatet = [$campo => $valor, 'motivo_cancelacion' => $motivo]; //$this->getInserts($field_name, $value);
-        }else{
+        } else {
             $CamposUpdatet = [$campo => $valor]; //$this->getInserts($field_name, $value);
         }
-        
+
 
         DB::table('bit_reg_vehiculos')
                 ->where('id_reg_veh', $idRegVeh)
@@ -231,33 +232,31 @@ class VehiculoController extends Controller {
 
 
             return response()->json(["message" => "Update correcta", "status" => 201, "chechVin" => $chechVin], 201);
-            
         } else if ($campo == "id_tipo_danio") {
 
             $fecactual = date("Y-m-d");
             $DiasH = DB::table('cat_tipo_danio')->where('id_tipo_danio', $valor)->where('estatus', 'alta')->get(['dias_habiles']);
             $DiasH = $DiasH[0]->dias_habiles;
             $fecPromesa = HelperDate::sumarDiasHabiles($fecactual, $DiasH);
-            $CamposUpdatet2 = ["fec_promesa" => $fecPromesa ];
+            $CamposUpdatet2 = ["fec_promesa" => $fecPromesa];
             DB::table('bit_reg_vehiculos')
-                        ->where('id_reg_veh', $idRegVeh)
-                        ->update($CamposUpdatet2);
-            
-            if($DiasH == '0'){
+                    ->where('id_reg_veh', $idRegVeh)
+                    ->update($CamposUpdatet2);
+
+            if ($DiasH == '0') {
                 $fecPromesa = "Fuera de parametros";
-            }else{
+            } else {
                 $fecPromesa = date("d-m-Y", strtotime($fecPromesa));
             }
-            
-            
-            return response()->json(["message" => "Update correcta", "status" => 201, "fecPromesa"=>$fecPromesa ], 201);
-            
+
+
+            return response()->json(["message" => "Update correcta", "status" => 201, "fecPromesa" => $fecPromesa], 201);
         } else if ($campo == "estatus") {
 
             $fecEstatus = Carbon::now('America/Mexico_City');
             $idUserReg = "1";
             $this->insertLog($idRegVeh, $valor, $fecEstatus, $idUserReg, "", "", "", $motivo);
-            
+
             return response()->json(["message" => "Update correcta", "status" => 201,], 201);
         } else {
             return response()->json(["message" => "Update correcta", "status" => 201,], 201);
@@ -541,34 +540,30 @@ class VehiculoController extends Controller {
         return response()->json(["message" => "Upload correcto", "status" => 201, "res" => "ok"], 201);
     }
 
-    
     public function PruebaFechas() {
-        
-           $hoy = date("Y-m-d");
-           echo $fecactual = $hoy;
-            echo " - -  - - - - ";
-            $Dias = DB::table('cat_tipo_danio')->where('id_tipo_danio', '2')->where('estatus', 'alta')->get(['dias_habiles']);           
-            echo $DiasHab = $Dias[0]->dias_habiles;
-           // echo  $DiasHab;
-            echo " - - ";
-            $fecPromesa = HelperDate::sumarDiasHabiles($fecactual, $DiasHab);
 
-            echo $fecPromesa;
-            
-            echo " ----- ";
-            echo $feP =  date("d-m-Y", strtotime($fecPromesa));
-            
+        $hoy = date("Y-m-d");
+        echo $fecactual = $hoy;
+        echo " - -  - - - - ";
+        $Dias = DB::table('cat_tipo_danio')->where('id_tipo_danio', '2')->where('estatus', 'alta')->get(['dias_habiles']);
+        echo $DiasHab = $Dias[0]->dias_habiles;
+        // echo  $DiasHab;
+        echo " - - ";
+        $fecPromesa = HelperDate::sumarDiasHabiles($fecactual, $DiasHab);
+
+        echo $fecPromesa;
+
+        echo " ----- ";
+        echo $feP = date("d-m-Y", strtotime($fecPromesa));
     }
-    
+
     public function catalogosFormularios(Request $request) {
-               
-            $catTipoDanio = DB::table('cat_tipo_danio')
+
+        $catTipoDanio = DB::table('cat_tipo_danio')
                 ->where('estatus', "alta")
                 ->get();
 
         return response()->json(["message" => "Update correcta", "status" => 201, "catTipoDanio" => $catTipoDanio], 201);
-        
     }
-    
-    
+
 }
