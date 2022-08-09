@@ -168,24 +168,24 @@ class VehiculoController extends Controller {
     public function createRegVeh(Request $request) {
         $params = $request->all();
         $arr = $params['parametros'];
-        foreach ($arr as $value) {
 
-            $CountStock = DB::table('bit_reg_vehiculos')->where('stock', $value)->where('estatus', '<>', 'cancelado')->count();
+        $stock = $arr['stock'];
+        $CountStock = DB::table('bit_reg_vehiculos')->where('stock', $stock)->where('estatus', '<>', 'cancelado')->count();
 
-            if ($CountStock == '0') {
-                $date = Carbon::now('America/Mexico_City');
-                $Camposinsert = ["stock" => $value, "fec_registro" => $date]; //$this->getInserts($field_name, $value);
-                DB::table("bit_reg_vehiculos")->upsert($Camposinsert, ['id_reg_veh']);
-                $idRegVeh = BitRegVehiculos::latest('id_reg_veh')->first();
-                //$date = Carbon::parse('2022-08-02 10:11:00');
-                $this->insertLog($idRegVeh->id_reg_veh, "Por asignar", $date, "1", "", "", "", "");
-                return response()->json(["message" => "Creacion correcta", "status" => 201, "idRegVeh" => $idRegVeh->id_reg_veh, "CountStock"=> $CountStock], 201);
-            } else {
-                return response()->json(["message" => "El Stock ya existe", "status" => 201, "idRegVeh" => '0', "CountStock"=> $CountStock], 201);
-            }
+        if ($CountStock == '0') {
+            $date = Carbon::now('America/Mexico_City');
+            $Camposinsert = ["stock" => $stock, "fec_registro" => $date]; //$this->getInserts($field_name, $value);
+            DB::table("bit_reg_vehiculos")->upsert($Camposinsert, ['id_reg_veh']);
+            $idRegVeh = BitRegVehiculos::latest('id_reg_veh')->first();
+            //$date = Carbon::parse('2022-08-02 10:11:00');
+            $this->insertLog($idRegVeh->id_reg_veh, "Por asignar", $date, "1", "", "", "", "");
+            return response()->json(["message" => "Creacion correcta", "status" => 201, "idRegVeh" => $idRegVeh->id_reg_veh, "CountStock" => $CountStock], 201);
+        } else {
+            return response()->json(["message" => "El Stock ya existe", "status" => 201, "idRegVeh" => '0', "CountStock" => $CountStock], 201);
         }
 
-        
+
+
         //$data = BitRegVehiculos::create($request->all());
     }
 
