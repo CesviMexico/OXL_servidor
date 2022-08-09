@@ -212,6 +212,7 @@ class PropsColumnas
             "label" => $label,
             "value" => $value,
             "option" => $option
+           
         ];
     }
 

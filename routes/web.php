@@ -35,3 +35,5 @@ $router->group(['prefix' => 'evidencias'], function () use ($router) {
 $router->group(['prefix' => 'estatus'], function () use ($router) {
    $router->get('inspecciones/{id}',  ['uses' => 'BitLogEstatusControllers@showInspecciones']);
 });
+
+

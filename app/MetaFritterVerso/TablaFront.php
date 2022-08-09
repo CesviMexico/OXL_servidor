@@ -19,12 +19,12 @@ class TablaFront
             "positionBottom" => "bottomRight", // bottomLeft |bottomCenter|bottomRight
             "positionTop" => 'none', // topLeft |topCenter |topRight|
             "Title" => $title,
-            "size" => 'small', //default | middle | small
+           // "size" => 'small', //default | middle | small
             "bordered" => false,
-            // "scrollX" => "100%",
+            "scrollX" => "95%",
             // "scrollY" => 300,
             "IconAvatar" => 'mdi:cog-refresh-outline',
-            "tableLayout" => "auto",
+            //"tableLayout" => "auto",
         ];
     }
 
@@ -51,8 +51,7 @@ class TablaFront
             $values = [
                 "title" => $data['label'], 
                 "dataIndex" => $data['value'], 
-                "key" => $data['value'],
-                
+                "key" => $data['value']
             ];
         }else{
             $values = [
