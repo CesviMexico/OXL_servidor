@@ -566,4 +566,37 @@ class VehiculoController extends Controller {
         return response()->json(["message" => "Update correcta", "status" => 201, "catTipoDanio" => $catTipoDanio], 201);
     }
 
+    public function getListasPiezas(Request $request) {
+        $params = $request->all();
+        $arr = $params['parametros'];
+        $idRegVeh = $arr['idRegVeh'];
+
+        $regpzascambio = DB::table('bit_piezas')
+                ->where('id_reg_veh', $idRegVeh)
+                ->where('tipo', "cambio")
+                ->where('estatus', "alta")
+                ->get(["id_bit_piezas", "pieza"]);
+        
+         $regpzasrepar = DB::table('bit_piezas')
+                ->where('id_reg_veh', $idRegVeh)
+                ->where('tipo', "reparacion")
+                ->where('estatus', "alta")
+                ->get(["id_bit_piezas", "pieza"]);
+         
+         $files = DB::table('bit_evidencia')
+                 ->select(
+                        DB::raw(" bit_evidencia.id_bit_evidencia AS uid"), 
+                        DB::raw(" bit_evidencia.evidencia AS name"),
+                        DB::raw(" 'done' AS status"),
+                        DB::raw(" bit_evidencia.evidencia AS url")
+                        )
+                ->where('id_reg_veh', $idRegVeh)
+                ->where('estatus_registro', "por_asignar")
+                ->get();
+         
+         
+
+        return response()->json(["message" => "Update correcta", "status" => 201, "pzascambio" => $regpzascambio,  "pzasrepar" => $regpzasrepar, 'files' => $files], 201);
+    }
+
 }

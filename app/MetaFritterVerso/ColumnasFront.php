@@ -114,22 +114,44 @@ class ColumnasFront {
     }
 
     public static function columnasTablaPorAsignar($perfil = "cesvi") {
-        $perfiles = [
-            "cesvi" =>
-            [
-                "asignar" => [
+       
+        
+        $asignar = [
                     "data" => PropsColumnas::getDataBase("Asignar", "Modal", true),
                     "extras" => [
                         PropsColumnas::getModales(
                                 "Asignar",
-                                "Asignar",
+                                "ic:outline-assignment-turned-in",
                                 "asignacion",
-                                "text"
+                                "icon"
                         ),
                     ]
-                ]
+                ];
+        
+        $editar = [
+                    "data" => PropsColumnas::getDataBase("Editar", "Modal", true),
+                    "extras" => [
+                        PropsColumnas::getModales(
+                                "Editar",
+                                "el:file-edit",
+                                "editar",
+                                "icon"
+                        ),
+                    ]
+                ];
+        
+        
+        $perfiles = [
+            "cesvi" => [
+                "asignar" => $asignar,
+                "editar" => $editar
+            ],
+            "taller" => [],
+            "olx" => [
+                "editar" => $editar
             ]
         ];
+        
 
         $arr = [
             [
@@ -180,6 +202,18 @@ class ColumnasFront {
                 "extras" => [PropsColumnas::getAlign('center')]
             ],
             [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "editar"
+                ]
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "asignar"
+                ]
+            ],
+            [
                 "data" => PropsColumnas::getDataBase("Cancelar", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
@@ -188,22 +222,6 @@ class ColumnasFront {
                             "cancelar",
                             "icon"
                     ),
-                ]
-            ],
-//            [
-//                "data" => PropsColumnas::getDataBase("Cancelar", "Cancelar", true),
-//                "extras" => [
-//                    PropsColumnas::getActions(
-//                            5,
-//                            "¿Cancelar?",
-//                            "mdi:table-cancel"
-//                    ),
-//                ]
-//            ],
-            [
-                "perfil" => [
-                    "value" => "si",
-                    "label" => "asignar"
                 ]
             ],
         ];
