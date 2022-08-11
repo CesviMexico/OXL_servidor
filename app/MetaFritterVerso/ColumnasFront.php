@@ -178,6 +178,32 @@ class ColumnasFront {
                 "data" => PropsColumnas::getDataBase("Color", "color"),
                 "extras" => []
             ],
+            
+            
+            [
+                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas cambio",
+                            "tot_pza_cambio",
+                            "PiezasCambio",
+                            "field"
+                    ),
+                ]
+            ],
+            
+            [
+                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas reparación",
+                            "tot_pza_repar",
+                            "PiezasReparacion",
+                            "field"
+                    ),
+                ]
+            ],
+            
             [
                 "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
                 "extras" => []
@@ -198,7 +224,7 @@ class ColumnasFront {
                 "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Hra. trascurridas", "time_por_asignado"),
+                "data" => PropsColumnas::getDataBase("Tiempo trascurrido", "time_por_asignado"),
                 "extras" => [PropsColumnas::getAlign('center')]
             ],
             [
@@ -217,8 +243,8 @@ class ColumnasFront {
                 "data" => PropsColumnas::getDataBase("Cancelar", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
-                            "ver más",
-                            "mdi:table-cancel",
+                            "Cancelar",
+                            "icomoon-free:cancel-circle",
                             "cancelar",
                             "icon"
                     ),
@@ -257,8 +283,8 @@ class ColumnasFront {
                 "data" => PropsColumnas::getDataBase("Cancelar", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
-                            "ver más",
-                            "mdi:table-cancel",
+                            "Cancelar",
+                            "icomoon-free:cancel-circle",
                             "cancelar",
                             "icon"
                     ),
@@ -314,21 +340,28 @@ class ColumnasFront {
                 "data" => PropsColumnas::getDataBase("Color", "color"),
                 "extras" => []
             ],
-            [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_cambio"),
-                "extras" => []
+             [
+                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas cambio",
+                            "tot_pza_cambio",
+                            "PiezasCambio",
+                            "field"
+                    ),
+                ]
             ],
+            
             [
-                "data" => PropsColumnas::getDataBase("Piezas a sustituir", "pza_cambio"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_repar"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("Piezas a reparar", "pza_reparacion"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas reparación",
+                            "tot_pza_repar",
+                            "PiezasReparacion",
+                            "field"
+                    ),
+                ]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
@@ -356,8 +389,8 @@ class ColumnasFront {
                 "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Hra. trascurridas", "time_asignado"),
-                "extras" => [PropsColumnas::getAlign('center')]
+                "data" => PropsColumnas::getDataBase("Tiempo trascurridas", "time_asignado"),
+                "extras" => [PropsColumnas::getAlign('center'),PropsColumnas::getTiempoTrascurrido(true)]
             ],
             [
                 "perfil" => [
@@ -402,8 +435,8 @@ class ColumnasFront {
                 "data" => PropsColumnas::getDataBase("Cancelar", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
-                            "ver más",
-                            "mdi:table-cancel",
+                            "Cancelar",
+                            "icomoon-free:cancel-circle",
                             "cancelar",
                             "icon"
                     ),
@@ -460,20 +493,27 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_cambio"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas cambio",
+                            "tot_pza_cambio",
+                            "PiezasCambio",
+                            "field"
+                    ),
+                ]
             ],
+            
             [
-                "data" => PropsColumnas::getDataBase("Piezas a sustituir", "pza_cambio"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_repar"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("Piezas a reparar", "pza_reparacion"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas reparación",
+                            "tot_pza_repar",
+                            "PiezasReparacion",
+                            "field"
+                    ),
+                ]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
@@ -501,8 +541,8 @@ class ColumnasFront {
                 "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Hras. trascurridas", "time_ingreso"),
-                "extras" => [PropsColumnas::getAlign('center')]
+                "data" => PropsColumnas::getDataBase("Tiempo trascurridas", "time_ingreso"),
+                "extras" => [PropsColumnas::getAlign('center'),PropsColumnas::getTiempoTrascurrido(true)]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fotos ingreso", "Modal", true),
@@ -619,20 +659,27 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_cambio"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas cambio",
+                            "tot_pza_cambio",
+                            "PiezasCambio",
+                            "field"
+                    ),
+                ]
             ],
+            
             [
-                "data" => PropsColumnas::getDataBase("Piezas a sustituir", "pza_cambio"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_repar"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("Piezas a reparar", "pza_reparacion"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas reparación",
+                            "tot_pza_repar",
+                            "PiezasReparacion",
+                            "field"
+                    ),
+                ]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
@@ -679,8 +726,8 @@ class ColumnasFront {
                 "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Hras trascurridas", "time_termino"),
-                "extras" => [PropsColumnas::getAlign('center')]
+                "data" => PropsColumnas::getDataBase("Tiempo trascurridas", "time_termino"),
+                "extras" => [PropsColumnas::getAlign('center'), PropsColumnas::getTiempoTrascurrido(true)]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Revisión", "Modal", true),
@@ -770,20 +817,27 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_cambio"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas cambio",
+                            "tot_pza_cambio",
+                            "PiezasCambio",
+                            "field"
+                    ),
+                ]
             ],
+            
             [
-                "data" => PropsColumnas::getDataBase("Piezas a sustituir", "pza_cambio"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_repar"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("Piezas a reparar", "pza_reparacion"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas reparación",
+                            "tot_pza_repar",
+                            "PiezasReparacion",
+                            "field"
+                    ),
+                ]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),
@@ -934,20 +988,27 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_cambio"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas cambio",
+                            "tot_pza_cambio",
+                            "PiezasCambio",
+                            "field"
+                    ),
+                ]
             ],
+            
             [
-                "data" => PropsColumnas::getDataBase("Piezas a sustituir", "pza_cambio"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("No.", "tot_pza_repar"),
-                "extras" => []
-            ],
-            [
-                "data" => PropsColumnas::getDataBase("Piezas a reparar", "pza_reparacion"),
-                "extras" => []
+                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Piezas reparación",
+                            "tot_pza_repar",
+                            "PiezasReparacion",
+                            "field"
+                    ),
+                ]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Tipo de daño", "tipo_danio"),

@@ -286,6 +286,12 @@ class PropsColumnas
     {
         return ["ellipsis" => true];
     }
+    
+     public static function getTiempoTrascurrido()
+    {
+        return ["tiempotrascurrido" => true];
+    }
+    
 
     public static function getActions($width = 130, $titleMSG = "", $icon = "")
     {

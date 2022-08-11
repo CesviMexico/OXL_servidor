@@ -46,4 +46,7 @@ $router->group(['prefix' => 'prueba'], function () use ($router) {
    $router->get('',  ['uses' => 'VehiculoController@PruebaFechas']);
 });
 
+$router->group(['prefix' => 'DashBoard'], function () use ($router) {
+   $router->post('',  ['uses' => 'DashBoardController@getInfoGeneralReport']);
+});
 

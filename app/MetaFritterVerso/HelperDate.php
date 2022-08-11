@@ -28,7 +28,7 @@ class HelperDate
                 $fecha = HelperDate::sumarDiasNaturales($fecha, 1);
                 $wd    = HelperDate::getDayOfWeek($fecha);
                 /* Es mayor que el viernes o es festivo */
-            } while ($wd > 5 || 
+            } while ($wd  == 6  || $wd  == 0  || 
                      in_array($fecha, self::getDiasFetivos()));
         }
         return ($fecha);
