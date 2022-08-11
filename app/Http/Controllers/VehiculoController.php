@@ -368,7 +368,7 @@ class VehiculoController extends Controller {
             $extension = $request->file('file_vehiculo')->getClientOriginalExtension();
             $now = Carbon::now()->format('Ymd_His');
             $fileName = $estatus . "_" . uniqid() . "_" . $now . "." . $extension;
-            $destinationPath = getcwd() . "\\images\\vehiculos\\" . $idRegVeh . "\\";
+            $destinationPath = getcwd() . "/images/vehiculos/" . $idRegVeh . "/";
             $request->file('file_vehiculo')->move($destinationPath, $fileName);
 
             $Camposinsert = ["id_reg_veh" => $idRegVeh, "tipo" => "fotografia", "estatus_registro" => $estatus, "id_user_registra" => "1", "evidencia" => $fileName]; //$this->getInserts($field_name, $value);
