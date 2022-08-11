@@ -375,7 +375,8 @@ class VehiculoController extends Controller {
             DB::table("bit_evidencia")->upsert($Camposinsert, ['id_bit_evidencia']);
         }
 
-        return response()->json(["message" => "Upload correcto", "status" => 201, "path" => $destinationPath, "filename" => $fileName], 201);
+        return response()->json(["message" => "Upload correcto", "status" => 201, "path" => $destinationPath, "filename" => $fileName, 
+            "isValido"=> $request->file('file_vehiculo')], 201);
     }
 
     public function deletefiles(Request $request) {
@@ -588,6 +589,7 @@ class VehiculoController extends Controller {
                         DB::raw(" bit_evidencia.id_bit_evidencia AS uid"), 
                         DB::raw(" bit_evidencia.evidencia AS name"),
                         DB::raw(" 'done' AS status"),
+                        DB::raw(" 'ok' AS response"),
                         DB::raw(" bit_evidencia.evidencia AS url")
                         )
                 ->where('id_reg_veh', $idRegVeh)

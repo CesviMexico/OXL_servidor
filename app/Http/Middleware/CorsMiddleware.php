@@ -14,7 +14,7 @@ class CorsMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    { 
 
         if ($request->isMethod('OPTIONS')) {
             $response = response('OK', 200);
