@@ -33,7 +33,10 @@ class BitLogEstatusControllers extends Controller
     {
         //$data = BitLogEstatus::all();
         
-        $data = BitLogEstatus::where("estatus", 'inspeccionado')->where("id_reg_veh",$id )->get();
+        $data = BitLogEstatus::select(
+                        BitLogEstatus::raw(" bit_log_estatus.fec_estatus AS fec_estatus"), 
+                        BitLogEstatus::raw(" if(bit_log_estatus.result_inspeccion = 'aprobado', 'Aprobado', 'No aprobado') as result_inspeccion "), 
+                       )->where("estatus", 'inspeccionado')->where("id_reg_veh",$id )->get();
         
         $columnas = ColumnasFront::columnasTablaInspecciones();
         $columns = TablaFront::getColumns($columnas);
@@ -43,7 +46,7 @@ class BitLogEstatusControllers extends Controller
             "data" => $data,
             "columns" => $columns,
             "message" => "Info Actualizada",
-            "props_table" => TablaFront::getPropsTable("Tabla de inspecciones"),
+            "props_table" => TablaFront::getPropsTable("Bitácora de inspecciones"),
             "type" => "success"
         ];
         return response()->json($response);

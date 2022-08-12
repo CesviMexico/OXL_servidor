@@ -58,8 +58,10 @@ class VehiculoController extends Controller {
                                 DB::raw("TIMESTAMPDIFF(SECOND, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
                                 DB::raw("TIMESTAMPDIFF(SECOND, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
                                 DB::raw("TIMESTAMPDIFF(SECOND, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino"),
-                                DB::raw("if(bit_reg_vehiculos.estatus = 'por_asignar', 'por asignar', "
-                                        . "if(bit_reg_vehiculos.estatus = 'ingresado', 'en taller', bit_reg_vehiculos.estatus)) as estatus_historico")
+                                DB::raw("if(bit_reg_vehiculos.estatus = 'por_asignar', 'Por asignar', "
+                                        . "if(bit_reg_vehiculos.estatus = 'ingresado', 'En taller',  "
+                                        . "   CONCAT(UCASE(LEFT(bit_reg_vehiculos.estatus, 1)), 
+                             LCASE(SUBSTRING(bit_reg_vehiculos.estatus, 2)))  )) as estatus_historico")
                         )
                         ->where("bit_reg_vehiculos.estatus", "<>", 'cancelado')
                         ->where("bit_reg_vehiculos.id_taller_asignado", $idTaller)
@@ -73,8 +75,10 @@ class VehiculoController extends Controller {
                                 DB::raw("TIMESTAMPDIFF(SECOND, bit_reg_vehiculos.fec_asignado,'" . $date_actual . "' )AS time_asignado"),
                                 DB::raw("TIMESTAMPDIFF(SECOND, bit_reg_vehiculos.fec_ingreso,'" . $date_actual . "' )AS time_ingreso"),
                                 DB::raw("TIMESTAMPDIFF(SECOND, bit_reg_vehiculos.fec_terminado,'" . $date_actual . "' )AS time_termino"),
-                                DB::raw("if(bit_reg_vehiculos.estatus = 'por_asignar', 'por asignar', "
-                                        . "if(bit_reg_vehiculos.estatus = 'ingresado', 'en taller', bit_reg_vehiculos.estatus)) as estatus_historico")
+                                DB::raw("if(bit_reg_vehiculos.estatus = 'por_asignar', 'Por asignar', "
+                                        . "if(bit_reg_vehiculos.estatus = 'ingresado', 'En taller',  "
+                                        . "   CONCAT(UCASE(LEFT(bit_reg_vehiculos.estatus, 1)), 
+                             LCASE(SUBSTRING(bit_reg_vehiculos.estatus, 2)))  )) as estatus_historico")
                         )
                         ->where("bit_reg_vehiculos.estatus", "<>", 'cancelado')
                         ->orderBy($orderBy[$estatus], 'DESC')

@@ -181,7 +181,7 @@ class ColumnasFront {
             
             
             [
-                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Sust.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas cambio",
@@ -193,7 +193,7 @@ class ColumnasFront {
             ],
             
             [
-                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Rep.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas reparación",
@@ -209,7 +209,7 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Fotos registro", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "ver más",
@@ -224,8 +224,8 @@ class ColumnasFront {
                 "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Tiempo trascurrido", "time_por_asignado"),
-                "extras" => [PropsColumnas::getAlign('center')]
+                "data" => PropsColumnas::getDataBase("Transcurrido", "time_por_asignado"),
+                "extras" => [PropsColumnas::getAlign('center'),PropsColumnas::getTiempoTrascurrido(true)]
             ],
             [
                 "perfil" => [
@@ -341,7 +341,7 @@ class ColumnasFront {
                 "extras" => []
             ],
              [
-                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Sust.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas cambio",
@@ -353,7 +353,7 @@ class ColumnasFront {
             ],
             
             [
-                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Rep.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas reparación",
@@ -374,7 +374,7 @@ class ColumnasFront {
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Fotos registro", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Ver más",
@@ -389,7 +389,7 @@ class ColumnasFront {
                 "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Tiempo trascurridas", "time_asignado"),
+                "data" => PropsColumnas::getDataBase("Transcurrido", "time_asignado"),
                 "extras" => [PropsColumnas::getAlign('center'),PropsColumnas::getTiempoTrascurrido(true)]
             ],
             [
@@ -493,7 +493,7 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Sust.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas cambio",
@@ -505,7 +505,7 @@ class ColumnasFront {
             ],
             
             [
-                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Rep.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas reparación",
@@ -526,7 +526,7 @@ class ColumnasFront {
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Fotos registro", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Ver más",
@@ -541,7 +541,7 @@ class ColumnasFront {
                 "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Tiempo trascurridas", "time_ingreso"),
+                "data" => PropsColumnas::getDataBase("Transcurrido", "time_ingreso"),
                 "extras" => [PropsColumnas::getAlign('center'),PropsColumnas::getTiempoTrascurrido(true)]
             ],
             [
@@ -557,7 +557,7 @@ class ColumnasFront {
             ],
              [
                  "data" => PropsColumnas::getDataBase("Fecha promesa", "fec_promesa"),
-                 "extras" => [PropsColumnas::getTipoFecha()]
+                 "extras" => [PropsColumnas::getTipoFechaTime()]
              ],
             [
                 "perfil" => [
@@ -659,7 +659,7 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Sust.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas cambio",
@@ -671,7 +671,7 @@ class ColumnasFront {
             ],
             
             [
-                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Rep.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas reparación",
@@ -692,7 +692,7 @@ class ColumnasFront {
                 ]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Fotos registro", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Ver más",
@@ -719,14 +719,14 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha promesa", "fec_promesa"),
-                "extras" => [PropsColumnas::getTipoFecha()]
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha término", "fec_terminado"),
                 "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("Tiempo trascurridas", "time_termino"),
+                "data" => PropsColumnas::getDataBase("Transcurrido", "time_termino"),
                 "extras" => [PropsColumnas::getAlign('center'), PropsColumnas::getTiempoTrascurrido(true)]
             ],
             [
@@ -770,10 +770,7 @@ class ColumnasFront {
 
     public static function columnasTablaInspecciones() {
         $arr = [
-            [
-                "data" => PropsColumnas::getDataBase("Estatus", "estatus"),
-                "extras" => []
-            ],
+           
             [
                 "data" => PropsColumnas::getDataBase("Fecha", "fec_estatus"),
                 "extras" => [
@@ -817,7 +814,7 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Sust.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas cambio",
@@ -829,7 +826,7 @@ class ColumnasFront {
             ],
             
             [
-                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Rep.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas reparación",
@@ -848,7 +845,7 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Fotos registro", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Ver más",
@@ -875,7 +872,7 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha promesa", "fec_promesa"),
-                "extras" => [PropsColumnas::getTipoFecha()]
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha término", "fec_terminado"),
@@ -937,7 +934,7 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Fotos registro", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Ver más",
@@ -965,30 +962,30 @@ class ColumnasFront {
         $arr = [
             [
                 "data" => PropsColumnas::getDataBase("Stock", "stock"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("VIN", "vin"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Marca", "marca"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Modelo", "modelo"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Año", "anio"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Color", "color"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
-                "data" => PropsColumnas::getDataBase("No. C.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Sust.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas cambio",
@@ -1000,7 +997,7 @@ class ColumnasFront {
             ],
             
             [
-                "data" => PropsColumnas::getDataBase("No. R.", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Rep.", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Piezas reparación",
@@ -1019,7 +1016,7 @@ class ColumnasFront {
                 "extras" => []
             ],
             [
-                "data" => PropsColumnas::getDataBase("Fotos", "Modal", true),
+                "data" => PropsColumnas::getDataBase("Fotos registro", "Modal", true),
                 "extras" => [
                     PropsColumnas::getModales(
                             "Ver más",
@@ -1046,7 +1043,7 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha promesa", "fec_promesa"),
-                "extras" => [PropsColumnas::getTipoFecha()]
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha término", "fec_terminado"),
@@ -1069,7 +1066,7 @@ class ColumnasFront {
             ],
             [
                 "data" => PropsColumnas::getDataBase("Estauts", "estatus_historico"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
         ];
 

@@ -55,7 +55,7 @@ WHERE
 FROM
   `cat_tipo_danio`
   LEFT OUTER JOIN `bit_reg_vehiculos` ON (`cat_tipo_danio`.`id_tipo_danio` = `bit_reg_vehiculos`.`id_tipo_danio`) and
-   (`bit_reg_vehiculos`.`estatus` = 'entregado' )
+   (`bit_reg_vehiculos`.`estatus` <> 'cancelado' )
 WHERE
    `cat_tipo_danio`.`estatus` = 'alta'
 GROUP BY
