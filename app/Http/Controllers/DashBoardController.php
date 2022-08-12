@@ -48,11 +48,22 @@ FROM
 WHERE
   `bit_reg_vehiculos`.`estatus` = 'entregado') as tmp");
 
-      
-         
-         
+      $porcTipoDanio = DB::select("SELECT 
+`cat_tipo_danio`.`id_tipo_danio` ,
+ `cat_tipo_danio`.`tipo_danio`,
+ count(`bit_reg_vehiculos`.`id_reg_veh`) AS `t_Reg` 
+FROM
+  `cat_tipo_danio`
+  LEFT OUTER JOIN `bit_reg_vehiculos` ON (`cat_tipo_danio`.`id_tipo_danio` = `bit_reg_vehiculos`.`id_tipo_danio`) and
+   (`bit_reg_vehiculos`.`estatus` = 'entregado' )
+WHERE
+   `cat_tipo_danio`.`estatus` = 'alta'
+GROUP BY
+  `cat_tipo_danio`.`id_tipo_danio`");
 
-        return response()->json(["message" => "Update correcta", "status" => 201, "regEstatus" => $regEstatus, 'promTimeEstatus'=>$promTimeEstatus], 201);
+       
+      
+        return response()->json(["message" => "Update correcta", "status" => 201, "regEstatus" => $regEstatus, 'promTimeEstatus'=>$promTimeEstatus, "porcTipoDanio" => $porcTipoDanio], 201);
     }
 
 }
