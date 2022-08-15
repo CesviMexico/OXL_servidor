@@ -23,7 +23,8 @@ sum(if( `bit_reg_vehiculos`.`estatus` = 'por_asignar',1,0)) as por_asignar,
 sum(if( `bit_reg_vehiculos`.`estatus` = 'asignado',1,0)) as asignado,
 sum(if( `bit_reg_vehiculos`.`estatus` = 'ingresado',1,0)) as ingresado,
 sum(if( `bit_reg_vehiculos`.`estatus` = 'terminado',1,0)) as terminado,
-sum(if( `bit_reg_vehiculos`.`estatus` = 'entregado',1,0)) as entregado
+sum(if( `bit_reg_vehiculos`.`estatus` = 'entregado',1,0)) as entregado,
+sum(if( `bit_reg_vehiculos`.`estatus` = 'entregado'  and bit_reg_vehiculos.`fec_terminado` < bit_reg_vehiculos.`fec_promesa` ,1,0)) as t_cumpli_fecprom
 FROM
   `bit_reg_vehiculos`");
       

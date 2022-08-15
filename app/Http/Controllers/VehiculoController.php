@@ -243,7 +243,7 @@ class VehiculoController extends Controller {
                 if ($VINPlus->RESULTADO == '1') {
                     $CamposUpdatet2 = ["marca" => $VINPlus->MARCA, "modelo" => $VINPlus->MODELO, "anio" => $VINPlus->ANO]; //$this->getInserts($field_name, $value);                   
                 } else {
-                    $CamposUpdatet2 = ["marca" => "", "modelo" => "", "anio" => ""];
+                    $CamposUpdatet2 = ["marca" => "", "modelo" => "", "anio" => "0"];
                 }
                 DB::table('bit_reg_vehiculos')
                         ->where('id_reg_veh', $idRegVeh)
@@ -251,7 +251,7 @@ class VehiculoController extends Controller {
             }
 
 
-            return response()->json(["message" => "Update correcta", "status" => 201, "chechVin" => $chechVin], 201);
+            return response()->json(["message" => "Update correcta", "status" => 201, "chechVin" => $chechVin, "VINPlus"=>$VINPlus], 201);
 //        } else if ($campo == "id_tipo_danio") {
 //
 //            return response()->json(["message" => "Update correcta", "status" => 201, "fecPromesa" => $fecPromesa], 201);
