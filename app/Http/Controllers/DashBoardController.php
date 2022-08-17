@@ -19,31 +19,31 @@ class DashBoardController extends Controller {
         $arr = $params['parametros'];
         
       $regEstatus = DB::select("SELECT 
-sum(if( `bit_reg_vehiculos`.`estatus` = 'por_asignar',1,0)) as por_asignar,
-sum(if( `bit_reg_vehiculos`.`estatus` = 'asignado',1,0)) as asignado,
-sum(if( `bit_reg_vehiculos`.`estatus` = 'ingresado',1,0)) as ingresado,
-sum(if( `bit_reg_vehiculos`.`estatus` = 'terminado',1,0)) as terminado,
-sum(if( `bit_reg_vehiculos`.`estatus` = 'entregado',1,0)) as entregado,
-sum(if( `bit_reg_vehiculos`.`estatus` = 'entregado'  and bit_reg_vehiculos.`fec_terminado` < bit_reg_vehiculos.`fec_promesa` ,1,0)) as t_cumpli_fecprom
+COALESCE(sum(if( `bit_reg_vehiculos`.`estatus` = 'por_asignar',1,0)),0)  as por_asignar,
+COALESCE(sum(if( `bit_reg_vehiculos`.`estatus` = 'asignado',1,0)),0) as asignado,
+COALESCE(sum(if( `bit_reg_vehiculos`.`estatus` = 'ingresado',1,0)),0) as ingresado,
+COALESCE(sum(if( `bit_reg_vehiculos`.`estatus` = 'terminado',1,0)),0) as terminado,
+COALESCE(sum(if( `bit_reg_vehiculos`.`estatus` = 'entregado',1,0)),0) as entregado,
+COALESCE(sum(if( `bit_reg_vehiculos`.`estatus` = 'entregado'  and bit_reg_vehiculos.`fec_terminado` < bit_reg_vehiculos.`fec_promesa` ,1,0)),0) as t_cumpli_fecprom
 FROM
   `bit_reg_vehiculos`");
       
       $promTimeEstatus = DB::select("select 
-ROUND(AVG(tmp.time_asignacion),0) as time_asignacion,
-ROUND(AVG(tmp.time_ingreso),0) as time_ingreso,
-ROUND(AVG(tmp.time_reparacion),0) as time_reparacion,
-ROUND(AVG(tmp.time_entrega),0) as time_entrega,
-ROUND(AVG(tmp.time_estadia),0) as time_estadia
+COALESCE(ROUND(AVG(tmp.time_asignacion),0),0) as time_asignacion,
+COALESCE(ROUND(AVG(tmp.time_ingreso),0),0) as time_ingreso,
+COALESCE(ROUND(AVG(tmp.time_reparacion),0),0) as time_reparacion,
+COALESCE(ROUND(AVG(tmp.time_entrega),0),0) as time_entrega,
+COALESCE(ROUND(AVG(tmp.time_estadia),0),0) as time_estadia
 from
 (
 SELECT 
-  `bit_reg_vehiculos`.`id_reg_veh`,
-  `bit_reg_vehiculos`.`stock`,
-  TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_registro, `bit_reg_vehiculos`.`fec_asignado` )AS time_asignacion,
-  TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_asignado, `bit_reg_vehiculos`.`fec_ingreso` )AS time_ingreso,
-  TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_ingreso, `bit_reg_vehiculos`.`fec_terminado` )AS time_reparacion,
-  TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_terminado, `bit_reg_vehiculos`.`fec_entrega` )AS time_entrega,
-  TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_ingreso, `bit_reg_vehiculos`.`fec_entrega` )AS time_estadia
+ COALESCE(`bit_reg_vehiculos`.`id_reg_veh`,0) as id_reg_veh,
+  COALESCE(`bit_reg_vehiculos`.`stock`,0) as stock,
+  COALESCE(TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_registro, `bit_reg_vehiculos`.`fec_asignado` ),0) AS time_asignacion,
+  COALESCE(TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_asignado, `bit_reg_vehiculos`.`fec_ingreso` ),0) AS time_ingreso,
+  COALESCE(TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_ingreso, `bit_reg_vehiculos`.`fec_terminado` ),0) AS time_reparacion,
+  COALESCE(TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_terminado, `bit_reg_vehiculos`.`fec_entrega` ),0) AS time_entrega,
+  COALESCE(TIMESTAMPDIFF(MINUTE, bit_reg_vehiculos.fec_ingreso, `bit_reg_vehiculos`.`fec_entrega` ),0) AS time_estadia
 FROM
   `bit_reg_vehiculos`
 WHERE
