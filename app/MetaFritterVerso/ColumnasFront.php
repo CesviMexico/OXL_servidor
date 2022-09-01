@@ -302,10 +302,24 @@ class ColumnasFront {
             ]
         ];
 
+        
+        $reasignar = [
+                "data" => PropsColumnas::getDataBase("Re-asignar", "Modal", true),
+                "extras" => [
+                    PropsColumnas::getModales(
+                            "Re asignar",
+                            "mdi:archive-refresh-outline",
+                            "re_asignar",
+                            "icon"
+                    ),
+                ]
+            ];
+        
         $perfiles = [
             "cesvi" => [
                 "cancelar" => $cancelar,
-                "taller" => $taller
+                "taller" => $taller,
+                "reasignar" => $reasignar
             ],
             "taller" => [
                 "ingreso" => $ingreso
@@ -396,6 +410,12 @@ class ColumnasFront {
                 "perfil" => [
                     "value" => "si",
                     "label" => "ingreso"
+                ]
+            ],
+            [
+                "perfil" => [
+                    "value" => "si",
+                    "label" => "reasignar"
                 ]
             ],
             [

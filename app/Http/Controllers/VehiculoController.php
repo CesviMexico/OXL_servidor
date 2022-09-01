@@ -460,9 +460,21 @@ class VehiculoController extends Controller {
 
         $idRegVeh = $arr['idRegVeh'];
         $idTallerAsignado = $arr['idTaller'];
+        
+        $modal = $arr['estatus'];
+        $fecasignacion = $arr['fecasignacion'];
+        $fecEstatus = "";
+        
+        
+        
+        if($modal == 're_asignacion'){
+             $fecEstatus = $fecasignacion;
+        }else{
+             $fecEstatus = Carbon::now('America/Mexico_City');
+        }
 
         $estatus = "asignado";
-        $fecEstatus = Carbon::now('America/Mexico_City');
+       
         $idUserReg = "1";
 
         $CamposUpdatet = ["estatus" => $estatus, "fec_asignado" => $fecEstatus, "id_taller_asignado" => $idTallerAsignado];
