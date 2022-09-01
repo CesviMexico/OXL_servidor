@@ -109,7 +109,7 @@ WHERE
 GROUP BY
   `cat_tipo_danio`.`id_tipo_danio`");
 
-        return response()->json(["message" => "Update correcta", "status" => 201, "regEstatus" => $regEstatus, 'promTimeEstatus' => $promTimeEstatus, "porcTipoDanio" => $porcTipoDanio, 'condicion' => $condicion], 201);
+        return response()->json(["message" => "Update correcta", "status" => 201, "regEstatus" => $regEstatus, 'promTimeEstatus' => $promTimeEstatus, "porcTipoDanio" => $porcTipoDanio], 201);
     }
 
 }
