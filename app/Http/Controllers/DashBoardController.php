@@ -19,9 +19,9 @@ class DashBoardController extends Controller {
         
         $fecIni = "";
         $fecFin = "";
-        if($arr['dateTimeSelect'] != ""){
-            $fecIni = $arr['dateTimeSelect'][0];
-            $fecFin = $arr['dateTimeSelect'][1];
+        if($arr['dateTimeSelect'][0] != "" && $arr['dateTimeSelect'][1] != ""){
+            $fecIni = $arr['dateTimeSelect'][0]." 00:00:00";
+            $fecFin = $arr['dateTimeSelect'][1]." 23:59:59";
         }
         
 
@@ -50,7 +50,7 @@ SELECT
 FROM
   `bit_log_estatus`
    INNER JOIN `bit_reg_vehiculos` ON (`bit_log_estatus`.`id_reg_veh` = `bit_reg_vehiculos`.`id_reg_veh`)
-  where 
+   WHERE  `bit_reg_vehiculos`.`estatus` <>  'baja' and 
    `bit_log_estatus`.`estatus` <> 'inspeccionado' and
   `bit_log_estatus`.`fec_estatus` BETWEEN '$fecIni' and '$fecFin' and 
   `bit_log_estatus`.`fec_estatus` = (select max(tblog.fec_estatus) from bit_log_estatus as tblog where tblog.id_reg_veh =  `bit_log_estatus`.`id_reg_veh` ) $condicion
@@ -105,11 +105,12 @@ FROM
   LEFT OUTER JOIN `bit_reg_vehiculos` ON (`cat_tipo_danio`.`id_tipo_danio` = `bit_reg_vehiculos`.`id_tipo_danio`) and
    (`bit_reg_vehiculos`.`estatus` <> 'cancelado' )
 WHERE
+ `bit_reg_vehiculos`.`estatus` <>  'baja' and 
    `cat_tipo_danio`.`estatus` = 'alta' $condicion
 GROUP BY
   `cat_tipo_danio`.`id_tipo_danio`");
 
-        return response()->json(["message" => "Update correcta", "status" => 201, "regEstatus" => $regEstatus, 'promTimeEstatus' => $promTimeEstatus, "porcTipoDanio" => $porcTipoDanio], 201);
+        return response()->json(["message" => "Update correcta", "status" => 201, "regEstatus" => $regEstatus, 'promTimeEstatus' => $promTimeEstatus, "porcTipoDanio" => $porcTipoDanio, "fecIni"=>$fecIni, "fecFin"=>$fecFin], 201);
     }
 
 }

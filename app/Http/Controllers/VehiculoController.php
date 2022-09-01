@@ -64,6 +64,7 @@ class VehiculoController extends Controller {
                              LCASE(SUBSTRING(bit_reg_vehiculos.estatus, 2)))  )) as estatus_historico")
                         )
                         ->where("bit_reg_vehiculos.estatus", "<>", 'cancelado')
+                         ->where("bit_reg_vehiculos.estatus", "<>", 'baja')
                         ->where("bit_reg_vehiculos.id_taller_asignado", $idTaller)
                         ->orderBy($orderBy[$estatus], 'DESC')
                         ->get();
@@ -81,6 +82,7 @@ class VehiculoController extends Controller {
                              LCASE(SUBSTRING(bit_reg_vehiculos.estatus, 2)))  )) as estatus_historico")
                         )
                         ->where("bit_reg_vehiculos.estatus", "<>", 'cancelado')
+                         ->where("bit_reg_vehiculos.estatus", "<>", 'baja')
                         ->orderBy($orderBy[$estatus], 'DESC')
                         ->get();
             }
