@@ -19,10 +19,13 @@ class DashBoardController extends Controller {
         
         $fecIni = "";
         $fecFin = "";
-        if($arr['dateTimeSelect'][0] != "" && $arr['dateTimeSelect'][1] != ""){
+        if($arr['dateTimeSelect'] != ""){
+           if($arr['dateTimeSelect'][0] != "" && $arr['dateTimeSelect'][1] != ""){
             $fecIni = $arr['dateTimeSelect'][0]." 00:00:00";
             $fecFin = $arr['dateTimeSelect'][1]." 23:59:59";
+        } 
         }
+        
         
 
         $condicion = "";
