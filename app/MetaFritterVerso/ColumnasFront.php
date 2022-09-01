@@ -156,7 +156,7 @@ class ColumnasFront {
         $arr = [
             [
                 "data" => PropsColumnas::getDataBase("Stock", "stock"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("VIN", "vin"),
@@ -318,7 +318,7 @@ class ColumnasFront {
         $arr = [
             [
                 "data" => PropsColumnas::getDataBase("Stock", "stock"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("VIN", "vin"),
@@ -470,7 +470,7 @@ class ColumnasFront {
         $arr = [
             [
                 "data" => PropsColumnas::getDataBase("Stock", "stock"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("VIN", "vin"),
@@ -636,7 +636,7 @@ class ColumnasFront {
         $arr = [
             [
                 "data" => PropsColumnas::getDataBase("Stock", "stock"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("VIN", "vin"),
@@ -791,7 +791,7 @@ class ColumnasFront {
         $arr = [
             [
                 "data" => PropsColumnas::getDataBase("Stock", "stock"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("VIN", "vin"),
@@ -903,7 +903,7 @@ class ColumnasFront {
         $arr = [
             [
                 "data" => PropsColumnas::getDataBase("Stock", "stock"),
-                "extras" => []
+                "extras" => [PropsColumnas::getBusqueda()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("VIN", "vin"),
