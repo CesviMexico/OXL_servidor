@@ -1035,6 +1035,10 @@ class ColumnasFront {
                 "data" => PropsColumnas::getDataBase("Taller", "nombre_taller"),
                 "extras" => []
             ],
+             [
+                "data" => PropsColumnas::getDataBase("Fecha de registro", "fec_registro"),
+                "extras" => [PropsColumnas::getTipoFechaTime()]
+            ],
             [
                 "data" => PropsColumnas::getDataBase("Fotos registro", "Modal", true),
                 "extras" => [
@@ -1045,6 +1049,10 @@ class ColumnasFront {
                             "icon"
                     ),
                 ]
+            ],
+            [
+                "data" => PropsColumnas::getDataBase("Fecha de asigación", "fec_asignado"),
+                "extras" => [PropsColumnas::getTipoFechaTime()]
             ],
             [
                 "data" => PropsColumnas::getDataBase("Fecha de ingreso", "fec_ingreso"),
